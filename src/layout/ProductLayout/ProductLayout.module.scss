@@ -2,9 +2,15 @@
    --max-width-left: 69%;
 }
 
+.wrapper-riple-animation {
+   border-top-right-radius: 9px;
+   border-top-left-radius: 9px;
+}
+
 .wrapper {
    height: 100%;
    overflow: auto;
+   display: flex;
 }
 
 .inner {
@@ -28,8 +34,11 @@
 
    display: flex;
 
+   & > * {
+      margin: 0 16px;
+   }
+
    .navigation-tab-item {
-      margin: 0px 16px;
       padding: 9px 6px;
       border-radius: 6px;
 

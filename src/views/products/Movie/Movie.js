@@ -4,14 +4,30 @@ import style from './Movie.module.scss';
 import { MdFilterList } from 'react-icons/md';
 import { FaRegCircleXmark } from 'react-icons/fa6';
 
-import { MdPlaylistPlay } from 'react-icons/md';
+import { MdArrowDropDown } from 'react-icons/md';
 
-import { useRef } from 'react';
+import {
+   CgChevronLeft,
+   CgChevronRight,
+   CgPushChevronLeft,
+   CgPushChevronRight,
+} from 'react-icons/cg';
+
+import { LiaPencilAltSolid } from 'react-icons/lia';
+import { RiFolderVideoLine } from 'react-icons/ri';
+import { AiOutlineBarChart } from 'react-icons/ai';
+
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import RowMovie from './RowMovie';
 
 const cx = classNames.bind(style);
 
 function Movie() {
    const searchInputRef = useRef(null);
+
+   const [listMoviesState, setListMoviesState] = useState(Array(12).fill(0));
+
    return (
       <>
          <div className={cx('filter')}>
@@ -48,6 +64,7 @@ function Movie() {
             <div className={cx('table')}>
                <div className={cx('table-header')}>
                   <div
+                     className={cx('table-col')}
                      style={{
                         flex: '0 0 43px',
                         minWidth: '33px',
@@ -61,53 +78,58 @@ function Movie() {
                         }}
                      />
                   </div>
-                  <div style={{ flex: '3 0 390px' }}>Phim</div>
-                  <div style={{ flex: '1 0 90px' }}>Thể loại</div>
-                  <div style={{ flex: '1 0 90px' }}>Trạng thái</div>
-                  <div style={{ flex: '1 0 90px' }}>Sửa đổi gần nhất</div>
-                  <div style={{ flex: '1 0 60px' }}>Số tập</div>
+                  <div className={cx('table-col')} style={{ flex: '3 0 390px', minWidth: '390px' }}>
+                     Phim
+                  </div>
+                  <div className={cx('table-col')} style={{ flex: '2 0 90px', minWidth: '90px' }}>
+                     Thể loại
+                  </div>
+                  <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
+                     Trạng thái
+                  </div>
+                  <div className={cx('table-col')} style={{ flex: '1 0 90px', minWidth: '90px' }}>
+                     Sửa đổi gần nhất
+                  </div>
+                  <div className={cx('table-col')} style={{ flex: '0 0 60px', minWidth: '100px' }}>
+                     Số tập hiện tại
+                  </div>
                </div>
                <div className={cx('table-content')}>
-                  <div className={cx('table-row')}>
-                     <div
-                        style={{
-                           flex: '0 0 43px',
-                           minWidth: '33px',
-                           cursor: 'pointer',
-                        }}
-                     >
-                        <input
-                           type="checkbox"
-                           style={{
-                              cursor: 'pointer',
-                           }}
-                        />
-                     </div>
-                     <div className={cx('movie')} style={{ flex: '3 0 390px' }}>
-                        <div className={cx('movie-left')}>
-                           <img
-                              src="https://vcdn1-vnexpress.vnecdn.net/2019/07/30/anh-thien-nhien-dep-thang-7-1564483719.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=Nl3znv-VRtPyhJYhLwwRfA"
-                              alt=""
-                           />
-                           <div className={cx('layer')}>
-                              <span>0</span>
-                              <div className={cx('layer-icon')}>
-                                 <MdPlaylistPlay></MdPlaylistPlay>
-                              </div>
-                           </div>
-                        </div>
-                        <div className={cx('movie-right')}>
-                           <div className={cx('movie-right_name')}>Kim Bình Mai</div>
-                           <div className={cx('movie-right_description')}>
-                              Phim hay nhất thế giới
-                           </div>
-                           <div className={cx('movie-right_controls')}></div>
+                  {listMoviesState.map((element, index) => (
+                     <RowMovie key={index} />
+                  ))}
+               </div>
+            </div>
+
+            <div className={cx('footer-pagination')}>
+               <div className={cx('pagination-inner')}>
+                  <span>Số hàng của mỗi trang</span>
+                  <div className={cx('wrapper-combobox')}>
+                     <div className={cx('inner-combobox')}>
+                        <div className={cx('combobox-left')}>3</div>
+                        <div className={cx('combobox-right')}>
+                           <MdArrowDropDown></MdArrowDropDown>
                         </div>
                      </div>
-                     <div style={{ flex: '1 0 90px' }}>Thể loại</div>
-                     <div style={{ flex: '1 0 90px' }}>Trạng thái</div>
-                     <div style={{ flex: '1 0 90px' }}>Sửa đổi gần nhất</div>
-                     <div style={{ flex: '1 0 60px' }}>Số tập</div>
+                     <div className={cx('select-combobox')}>
+                        <div className={cx('select-combobox-item')}>10</div>
+                        <div className={cx('select-combobox-item')}>30</div>
+                        <div className={cx('select-combobox-item')}>50</div>
+                     </div>
+                  </div>
+
+                  <div className={cx('current-page')}>1 [4/4]</div>
+                  <div className={cx('page-icon', 'first-page')}>
+                     <CgPushChevronLeft></CgPushChevronLeft>
+                  </div>
+                  <div className={cx('page-icon', 'prev-page')}>
+                     <CgChevronLeft></CgChevronLeft>
+                  </div>
+                  <div className={cx('page-icon', 'next-page')}>
+                     <CgChevronRight></CgChevronRight>
+                  </div>
+                  <div className={cx('page-icon', 'last-page')}>
+                     <CgPushChevronRight></CgPushChevronRight>
                   </div>
                </div>
             </div>

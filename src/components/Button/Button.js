@@ -53,42 +53,42 @@ const Button = forwardRef(
          Comp = 'a';
       }
 
+      let start = false,
+         time0,
+         time1,
+         time2;
+
+      const handleAnimation = (e) => {
+         if (start && animationRef.current) {
+            animationRef.current.style.transition = 'all 0.3s cubic-bezier(0.75, 1, 0.25, 0)';
+            animationRef.current.style.border = '1px solid rgba(22, 24, 35, 0.4)';
+
+            time0 = setTimeout(() => {
+               if (animationRef.current) {
+                  animationRef.current.style.border = '1px solid rgba(22, 24, 35, 0.3)';
+                  animationRef.current.style.backgroundColor = 'transparent';
+               }
+               clearTimeout(time0);
+            }, 40);
+
+            time1 = setTimeout(() => {
+               if (animationRef.current) {
+                  animationRef.current.style.border = '1px solid rgba(22, 24, 35, 0.1)';
+               }
+               clearTimeout(time1);
+            }, 80);
+
+            time2 = setTimeout(() => {
+               if (animationRef.current)
+                  animationRef.current.style.border = '1px solid transparent';
+               clearTimeout(time2);
+            }, 120);
+
+            start = false;
+         }
+      };
+
       useEffect(() => {
-         let start = false,
-            time0,
-            time1,
-            time2;
-
-         const handleAnimation = (e) => {
-            if (start && animationRef.current) {
-               animationRef.current.style.transition = 'all 0.3s cubic-bezier(0.75, 1, 0.25, 0)';
-               animationRef.current.style.border = '1px solid rgba(22, 24, 35, 0.4)';
-
-               time0 = setTimeout(() => {
-                  if (animationRef.current) {
-                     animationRef.current.style.border = '1px solid rgba(22, 24, 35, 0.3)';
-                     animationRef.current.style.backgroundColor = 'transparent';
-                  }
-                  clearTimeout(time0);
-               }, 40);
-
-               time1 = setTimeout(() => {
-                  if (animationRef.current) {
-                     animationRef.current.style.border = '1px solid rgba(22, 24, 35, 0.1)';
-                  }
-                  clearTimeout(time1);
-               }, 80);
-
-               time2 = setTimeout(() => {
-                  if (animationRef.current)
-                     animationRef.current.style.border = '1px solid transparent';
-                  clearTimeout(time2);
-               }, 120);
-
-               start = false;
-            }
-         };
-
          window.addEventListener('mouseup', handleAnimation);
 
          itemRef.current.addEventListener('mousedown', (e) => {

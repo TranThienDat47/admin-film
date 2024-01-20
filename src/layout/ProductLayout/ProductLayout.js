@@ -7,6 +7,7 @@ import { MdOutlineVideoSettings } from 'react-icons/md';
 import DefaultLayout from '~/layout/DefaultLayout';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
+import RipleAnimation from '~/components/RipleAnimation';
 
 const cx = classNames.bind(style);
 
@@ -89,12 +90,20 @@ function ProductLayout({ children }) {
                         <Link
                            key={elment.href[0]}
                            to={elment.href[0]}
-                           className={cx('navigation-tab-item', `${elment.active ? 'active' : ''}`)}
                            onClick={() => {
                               handleClickItemSideBar(elment);
                            }}
                         >
-                           <div>{elment.title}</div>
+                           <RipleAnimation className={cx('wrapper-riple-animation')}>
+                              <div
+                                 className={cx(
+                                    'navigation-tab-item',
+                                    `${elment.active ? 'active' : ''}`,
+                                 )}
+                              >
+                                 {elment.title}
+                              </div>
+                           </RipleAnimation>
                         </Link>
                      ))}
                   </div>

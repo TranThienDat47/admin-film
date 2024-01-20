@@ -1,0 +1,37 @@
+.wrapper {
+   position: relative;
+   overflow: hidden;
+   user-select: none;
+   -webkit-user-drag: none;
+
+   .riple-animation {
+      border-radius: 999px;
+      position: absolute;
+      width: 999px;
+      height: 999px;
+      background-color: var(--hover-color-dark);
+      transform: translateX(-50%) translateY(-50%);
+      animation: 2.3s riple;
+      user-select: none;
+      -webkit-user-drag: none;
+      z-index: -1;
+   }
+
+   @keyframes riple {
+      0% {
+         width: 0px;
+         height: 0px;
+         opacity: 1;
+      }
+      60% {
+         width: 30%px;
+         height: 30%px;
+         opacity: 0.9;
+      }
+      100% {
+         width: 100%px;
+         height: 100%px;
+         opacity: 0;
+      }
+   }
+}
