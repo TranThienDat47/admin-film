@@ -1,5 +1,5 @@
 :root {
-   --width-movie-image: 144px;
+   --width-movie-image: 113px;
 }
 .filter {
    display: flex;
@@ -70,13 +70,14 @@
          font-size: 1.6rem;
          width: 100%;
          margin: 16px 0;
-         padding-right: 16px;
+         padding-right: 36px;
       }
    }
 }
 
 .table-col {
    border-bottom: 1px solid var(--border-color);
+   padding-right: 6px;
 }
 
 .table-header {
@@ -87,6 +88,13 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: flex;
+      .table-col-icon {
+         display: flex;
+         margin-left: 6px;
+         align-items: center;
+         justify-content: center;
+      }
    }
 
    & > div:not(:first-child) {
@@ -138,6 +146,11 @@
 
    .category {
       padding-top: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
    }
    .status {
       padding-top: 16px;
@@ -159,15 +172,32 @@
 
    .wrapper-image-movie {
       display: flex;
+      flex-shrink: 0;
+
       position: relative;
       border-radius: 3px;
       overflow: hidden;
+      width: var(--width-movie-image);
 
-      flex-shrink: 0;
+      &::before {
+         content: '';
+         display: block;
+         padding-top: 135.3333%;
+         background-color: aliceblue;
+      }
 
       & > img {
-         width: var(--width-movie-image);
-         height: 81px;
+         height: 100%;
+         width: 100%;
+         object-fit: cover;
+         cursor: pointer;
+         -webkit-user-drag: none;
+         display: block;
+         position: absolute;
+         top: 0;
+         left: 0;
+         bottom: 0;
+         right: 0;
       }
 
       .layer {
@@ -176,8 +206,8 @@
          right: 0;
          bottom: 0;
 
-         height: 86%;
-         width: 43%;
+         height: 43%;
+         width: 49%;
 
          border-top-right-radius: 3px;
          border-bottom-right-radius: 3px;

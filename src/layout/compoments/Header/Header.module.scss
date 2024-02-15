@@ -56,9 +56,23 @@
    min-width: 239px;
    height: 100%;
 
+   .create-btn-riple {
+      border-radius: 13px;
+   }
+
    .infor-icon {
       position: relative;
       margin: 0 4px;
+
+      .infor-icon-inner {
+         font-weight: 400;
+         & .icon-create {
+            font-size: 2.1rem;
+            color: var(--active-item-color);
+         }
+
+         height: 40px;
+      }
 
       .icon {
          text-align: center;
@@ -76,6 +90,10 @@
             font-size: 1.6rem;
             font-weight: 500;
          }
+      }
+
+      .wrapper-create {
+         width: 239px;
       }
    }
 

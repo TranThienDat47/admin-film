@@ -38,9 +38,16 @@
       margin: 0 16px;
    }
 
+   .ref-item-sidebar {
+      -webkit-user-drag: none;
+      user-select: none;
+   }
+
    .navigation-tab-item {
       padding: 9px 6px;
       border-radius: 6px;
+      -webkit-user-drag: none;
+      user-select: none;
 
       &:hover {
          background-color: var(--hover-color);

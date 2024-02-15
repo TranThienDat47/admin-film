@@ -3,35 +3,56 @@
    overflow: hidden;
    user-select: none;
    -webkit-user-drag: none;
+   cursor: pointer;
 
    .riple-animation {
-      border-radius: 999px;
       position: absolute;
-      width: 999px;
-      height: 999px;
+      border-radius: 999px;
+      aspect-ratio: 1/1;
       background-color: var(--hover-color-dark);
       transform: translateX(-50%) translateY(-50%);
-      animation: 2.3s riple;
+      animation: 1.7s riple;
       user-select: none;
       -webkit-user-drag: none;
-      z-index: -1;
+   }
+
+   &.light {
+      .riple-animation {
+         background-color: var(--hover-color-light);
+      }
    }
 
    @keyframes riple {
       0% {
-         width: 0px;
-         height: 0px;
-         opacity: 1;
-      }
-      60% {
-         width: 30%px;
-         height: 30%px;
+         width: 0%;
+         // height: 0%;
+         aspect-ratio: 1/1;
+
          opacity: 0.9;
       }
-      100% {
-         width: 100%px;
-         height: 100%px;
-         opacity: 0;
+
+      40% {
+         width: 300%;
+         aspect-ratio: 1/1;
+
+         // height: 100%px;
+         opacity: 0.6;
       }
+
+      100% {
+         width: 900%;
+         aspect-ratio: 1/1;
+
+         // height: 100%px;
+         opacity: 0.3;
+      }
+   }
+}
+
+.disable {
+   cursor: unset;
+
+   .riple-animation {
+      display: none;
    }
 }

@@ -10,6 +10,7 @@ import { BiCommentDetail } from 'react-icons/bi';
 import { PiNotificationThin } from 'react-icons/pi';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { GoReport } from 'react-icons/go';
+import { TbCategoryPlus } from 'react-icons/tb';
 
 import routes from '~/config/routes';
 
@@ -59,6 +60,16 @@ const HeaderSidebar = forwardRef((prop, ref) => {
       },
       {
          id: 4,
+         icon: TbCategoryPlus,
+         title: 'Thể loại',
+         active: false,
+         href:
+            routes.category !== null && typeof routes.category === 'object'
+               ? Object.values(routes.category)
+               : [routes.category],
+      },
+      {
+         id: 5,
          icon: AiOutlineBarChart,
          title: 'Số liệu phân tích',
          active: false,
@@ -68,7 +79,7 @@ const HeaderSidebar = forwardRef((prop, ref) => {
                : [routes.analyst],
       },
       {
-         id: 5,
+         id: 6,
          icon: PiNotificationThin,
          title: 'Gửi thông báo',
          active: false,
@@ -84,7 +95,7 @@ const HeaderSidebar = forwardRef((prop, ref) => {
          if (
             element.href &&
             element.href.includes(currentPath) &&
-            currentPath.length === element.href.length
+            currentPath.length === element.href[0].length
          ) {
             element.active = true;
          } else {

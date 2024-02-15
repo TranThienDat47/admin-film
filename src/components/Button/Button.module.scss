@@ -1,22 +1,40 @@
 .wrapper {
    position: relative;
+
    display: inline-flex;
    justify-content: center;
    align-items: center;
-   font-size: 1.6rem;
-   font-weight: 600;
+
    min-width: 100px;
-   padding: 9px 16px;
+
    line-height: 22px;
    border-radius: 13px;
    cursor: pointer;
    background-color: var(--white);
    border: 1px solid transparent;
    user-select: none;
+   padding: 9px 16px;
+   overflow: hidden;
 
-   // +.wrapper {
-   //     margin-left: 8px;
-   // }
+   .ripple-amination {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+   }
+
+   & > .inner {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--black);
+
+      cursor: pointer;
+   }
 
    &.small {
       border-radius: 6px;
@@ -25,8 +43,15 @@
    &.disable {
       opacity: 0.5;
       pointer-events: none;
-      background-color: var(--grey-btn-hover) !important;
-      color: var(--text-bland);
+      background-color: var(--grey-btn-hover);
+      .inner {
+         color: var(--text-bland);
+      }
+   }
+
+   .onlyText {
+      border: none;
+      background-color: transparent;
    }
 }
 
@@ -73,8 +98,11 @@
 
 .primary {
    background-color: var(--btn-submit);
-   color: var(--white);
    border-color: var(--primary-second);
+
+   .inner {
+      color: var(--white);
+   }
 
    &:hover {
       border-color: var(--primary-second);
@@ -88,8 +116,11 @@
 
 .grey {
    background-color: var(--grey-btn);
-   color: var(--black);
    border-color: var(--primary-second);
+
+   .inner {
+      color: var(--black);
+   }
 
    &:hover {
       border-color: var(--primary-second);
@@ -113,13 +144,10 @@
 }
 
 .outline {
-   color: var(--primary-second);
-   border-color: currentColor;
-
-   &:hover {
-      border-color: currentColor;
-      background-color: rgba(254, 44, 85, 0.06);
+   .inner {
+      color: var(--text-color);
    }
+   border-color: var(--primary-second);
 }
 
 .text {
@@ -131,6 +159,11 @@
 .small {
    min-width: 88px;
    padding: 2px 16px;
+}
+
+.medium {
+   min-width: 88px;
+   padding: 6px 16px;
 }
 
 .large {
@@ -148,4 +181,9 @@
    border: 1px solid transparent;
    background-color: transparent;
    user-select: none;
+}
+
+.onlyText {
+   border: none;
+   background-color: transparent !important;
 }

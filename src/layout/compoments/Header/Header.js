@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, useContext, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import { AuthContext } from '~/contexts/auth';
@@ -10,8 +9,8 @@ import Search from '~/components/Search';
 import Button from '~/components/Button';
 import styles from './Header.module.scss';
 import HeaderSidebar from './HeaderSidebar';
-import Notification from './Notification';
 import Menu from '~/components/Popper/Menu';
+import { RiVideoAddLine } from 'react-icons/ri';
 
 import { BiUserCircle } from 'react-icons/bi';
 import {
@@ -22,10 +21,15 @@ import {
    AiOutlineRight,
    AiOutlineCheck,
    AiOutlineMenu,
-   AiOutlineBell,
 } from 'react-icons/ai';
+
 import { IoLanguageOutline } from 'react-icons/io5';
 import { RiSettingsLine } from 'react-icons/ri';
+import RipleAnimation from '~/components/RipleAnimation';
+
+import { RiVideoUploadLine } from 'react-icons/ri';
+import { MdOutlineVideoSettings } from 'react-icons/md';
+import CreateMovie from '~/views/components/CreateMovie';
 
 const cx = classNames.bind(styles);
 
@@ -34,6 +38,7 @@ function Header() {
       authState: { isAuthenticated, isVerify, user },
    } = useContext(AuthContext);
 
+   const [showCreateState, setShowCreateState] = useState(0);
    const [showNotification, setShowNotification] = useState(false);
    const [dataInit, setDataInit] = useState([
       {
@@ -82,6 +87,23 @@ function Header() {
       {
          title: <div className={cx('title')}>Đóng góp ý kiến</div>,
          left_icon: <AiOutlineExclamationCircle className={cx('icon')} />,
+      },
+   ]);
+
+   const [dataInitCreate, setDataInitCreate] = useState([
+      {
+         title: <div className={cx('title')}>Tạo phim mới</div>,
+         left_icon: <RiVideoUploadLine className={cx('icon')} />,
+         onChange: () => {
+            setShowCreateState(1);
+         },
+      },
+      {
+         title: <div className={cx('title')}>Tải video ngắn lên</div>,
+         left_icon: <MdOutlineVideoSettings className={cx('icon')} />,
+         onChange: () => {
+            setShowCreateState(2);
+         },
       },
    ]);
 
@@ -190,6 +212,10 @@ function Header() {
       };
    }, [notificationResultRef]);
 
+   const handleTemp = () => {
+      console.log('oiaisjiodf');
+   };
+
    return (
       <>
          <header className={cx('wrapper')}>
@@ -210,7 +236,26 @@ function Header() {
             </div>
 
             <div className={cx('infor')}>
-               <div className={cx('infor-icon')}></div>
+               <div className={cx('infor-icon')}>
+                  <Menu
+                     items={dataInitCreate}
+                     key={'000'}
+                     hideOnClick={true}
+                     className={cx('wrapper-create')}
+                  >
+                     <div>
+                        <Button
+                           className={cx('infor-icon-inner')}
+                           ripleAnimation
+                           medium
+                           leftIcon={<RiVideoAddLine className={cx('icon-create')} />}
+                           outline
+                        >
+                           Tạo
+                        </Button>
+                     </div>
+                  </Menu>
+               </div>
                <div className={cx('infor-icon')}>
                   <Menu
                      items={dataInit}
@@ -234,6 +279,13 @@ function Header() {
             </div>
          </header>
          <HeaderSidebar ref={childRef} />
+         {showCreateState === 1 && (
+            <CreateMovie
+               handleClose={() => {
+                  setShowCreateState(0);
+               }}
+            ></CreateMovie>
+         )}
       </>
    );
 }

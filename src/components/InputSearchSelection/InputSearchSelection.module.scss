@@ -1,0 +1,118 @@
+.wrapper {
+   color: var(--text-bland);
+   border: 1px solid var(--border-color);
+   padding: 6px 13px;
+   border-radius: 9px;
+
+   input {
+      border-radius: unset;
+      border: unset;
+      padding: 3px;
+   }
+
+   .inner {
+      display: flex;
+
+      .title {
+         padding: 0 16px 0 3px;
+         line-height: 2.3rem;
+         border-right: 1px solid var(--border-color);
+         flex-shrink: 0;
+         cursor: pointer;
+
+         margin: 4px 0;
+
+         user-select: none;
+
+         & > div {
+            margin-top: 3px;
+         }
+      }
+
+      .main {
+         flex: 1;
+         display: flex;
+         flex-wrap: wrap;
+         align-items: flex-start;
+         justify-content: flex-start;
+
+         margin-left: 6px;
+
+         .item-choose {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 3px 13px;
+            line-height: 2.3rem;
+            font-size: 1.4rem;
+            color: var(--text-bland);
+
+            margin: 4px;
+
+            .item-icon {
+               display: inline-flex;
+               align-items: center;
+               margin-left: 6px;
+               cursor: pointer;
+            }
+         }
+
+         & > .wrapper-input {
+            flex: 1;
+            min-width: 56px;
+            margin-left: 6px;
+            & > input {
+               width: 100%;
+               line-height: 2.3rem;
+               margin: 4px 0;
+            }
+         }
+      }
+
+      .wrapper-input {
+         position: relative;
+         display: flex;
+         flex-direction: column;
+
+         .wrapper-recommend {
+            padding-bottom: 10px;
+            position: absolute;
+            top: 100%;
+         }
+
+         .recommend-list {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--white);
+            border-radius: 6px;
+            box-shadow: 0 1px 2px 1px var(--box-shadow-color);
+
+            padding: 6px 0px;
+            .recommend-item {
+               padding: 6px 13px;
+               min-width: 279px;
+               white-space: nowrap;
+               cursor: pointer;
+
+               &.unable {
+                  &:hover {
+                     background-color: transparent;
+                  }
+                  cursor: context-menu;
+                  text-align: center;
+               }
+
+               &::first-letter {
+                  text-transform: uppercase;
+               }
+
+               &:hover {
+                  background-color: var(--hover-color-bland);
+               }
+            }
+         }
+      }
+   }
+}

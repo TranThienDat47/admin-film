@@ -5,13 +5,15 @@ import styles from './Menu.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MenuItem from './MenuItem';
 import Header from './Header';
-import { memo, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
 const defaultFn = () => {};
 
-function Menu({ children, items = [], hideOnClick = false, className, onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = false, className }) {
    const [history, setHistory] = useState([{ data: items }]);
+
+   const wrapperRef = useRef();
    const current = history[history.length - 1];
 
    const renderItem = () => {
@@ -25,8 +27,10 @@ function Menu({ children, items = [], hideOnClick = false, className, onChange =
                   if (isParent) {
                      setHistory((prev) => [...prev, item.children]);
                   } else {
-                     onChange(item);
+                     item.onChange();
                   }
+
+                  wrapperRef.current.click();
                }}
             />
          );
@@ -62,6 +66,7 @@ function Menu({ children, items = [], hideOnClick = false, className, onChange =
          render={renderResult}
          onHide={handleResetMenu}
          trigger="click"
+         ref={wrapperRef}
       >
          {children}
       </Tippy>

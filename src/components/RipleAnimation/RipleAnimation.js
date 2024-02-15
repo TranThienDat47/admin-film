@@ -4,10 +4,12 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function RipleAnimation({ children, className, ...props }) {
+function RipleAnimation({ children, className, light = false, disable = false, ...props }) {
    const wrapperRef = useRef(null);
    const [elementState, setElementState] = useState([]);
    const [isAnimating, setIsAnimating] = useState(false);
+
+   const [isClickState, setIsClickState] = useState(false);
 
    const handleRipleAnimation = (e) => {
       if (isAnimating) {
@@ -25,26 +27,38 @@ function RipleAnimation({ children, className, ...props }) {
 
       setElementState((prev) => [...prev, ripleElement]);
       setIsAnimating(true);
-
-      setTimeout(() => {
-         setElementState((prev) => prev.slice(1));
-         setIsAnimating(false);
-      }, 400);
    };
 
    useEffect(() => {
       const clickHandler = (e) => {
          handleRipleAnimation(e);
-         setTimeout(() => {
-            setIsAnimating(false);
-         }, 160);
+         setIsClickState(true);
       };
 
       wrapperRef.current.onmousedown = clickHandler;
    }, []);
 
+   useEffect(() => {
+      window.onmouseup = () => {
+         if (isClickState) {
+            setTimeout(() => {
+               setElementState((prev) => prev.slice(1));
+               setIsAnimating(false);
+            }, 200);
+            setTimeout(() => {
+               setIsAnimating(false);
+            }, 160);
+            setIsClickState(false);
+         }
+      };
+   }, [isClickState]);
+
    return (
-      <div ref={wrapperRef} className={cx('wrapper', { [className]: className })} {...props}>
+      <div
+         ref={wrapperRef}
+         className={cx('wrapper', { [className]: className, disable, light })}
+         {...props}
+      >
          {children}
          {elementState}
       </div>

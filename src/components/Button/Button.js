@@ -3,6 +3,7 @@ import styles from './Button.module.scss';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { forwardRef, useEffect, useRef } from 'react';
+import RipleAnimation from '../RipleAnimation';
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,10 @@ const Button = forwardRef(
          href,
          className,
          leftIcon,
+         color,
+         borderColor,
+         borderRadius,
+         fontSize = '1.6',
          rightIcon,
          transparent = false,
          normal = false,
@@ -22,12 +27,16 @@ const Button = forwardRef(
          disable = false,
          rounded = false,
          text = false,
-         small = false,
+         onlyText = false,
          hover = false,
+         small = false,
+         medium = false,
          large = false,
          children,
          onClick,
          backgroundColor,
+         ripleAnimation = false,
+         ripleAnimationLight = false,
          ...passProp
       },
       ref,
@@ -110,32 +119,52 @@ const Button = forwardRef(
          [className]: className,
          leftIcon,
          rightIcon,
+         fontSize,
+         color,
+         borderColor,
+         borderRadius,
          primary,
          grey,
          outline,
          text,
+         onlyText,
          small,
+         medium,
          large,
          normal,
          disable,
          rounded,
          transparent,
          hover,
+         ripleAnimation,
+         ripleAnimationLight,
       });
 
       return (
-         <div ref={ref}>
-            <Comp
-               ref={itemRef}
-               className={classes}
-               style={{ backgroundColor: backgroundColor }}
-               {...props}
-            >
+         <div
+            ref={ref}
+            className={classes}
+            {...props}
+            style={{
+               backgroundColor: backgroundColor,
+               fontSize: `${fontSize}rem`,
+               color: color,
+               borderColor: borderColor,
+               borderRadius: borderRadius,
+            }}
+         >
+            <Comp ref={itemRef} className={cx('inner')}>
                {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
                <div className={cx('title')}>{children}</div>
                {rightIcon && <span className={cx('icon', 'right')}>{rightIcon}</span>}
                {!transparent || <div ref={animationRef} className={cx('animation')}></div>}
             </Comp>
+            {ripleAnimation && (
+               <RipleAnimation
+                  light={ripleAnimationLight}
+                  className={cx('ripple-amination')}
+               ></RipleAnimation>
+            )}
          </div>
       );
    },
@@ -145,6 +174,10 @@ Button.propTypes = {
    to: PropTypes.string,
    href: PropTypes.string,
    className: PropTypes.string,
+   fontSize: PropTypes.string,
+   color: PropTypes.string,
+   borderColor: PropTypes.string,
+   borderRadius: PropTypes.string,
    leftIcon: PropTypes.node,
    rightIcon: PropTypes.node,
    primary: PropTypes.bool,
@@ -155,9 +188,13 @@ Button.propTypes = {
    hover: PropTypes.bool,
    transparent: PropTypes.bool,
    text: PropTypes.bool,
+   onlyText: PropTypes.bool,
    small: PropTypes.bool,
+   medium: PropTypes.bool,
    large: PropTypes.bool,
    normal: PropTypes.bool,
+   ripleAnimation: PropTypes.bool,
+   ripleAnimationLight: PropTypes.bool,
    children: PropTypes.node.isRequired,
    onClick: PropTypes.func,
 };

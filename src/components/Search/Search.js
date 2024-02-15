@@ -175,7 +175,7 @@ function Search() {
 
             <button
                className={cx('search-btn')}
-               name-tooltip={'Search'}
+               nametooltip={'Search'}
                ref={btnSearchRef}
                onMouseDown={(e) => {
                   e.preventDefault();

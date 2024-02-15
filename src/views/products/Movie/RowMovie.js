@@ -12,12 +12,13 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
-function RowMovie({ dataRow, checked = false }) {
+function RowMovie({ dataRow, isChecked = false, onCheckboxChange = () => {} }) {
    const [showControlMovie, setShowControlMovie] = useState(false);
-   const [checkedState, setCheckedState] = useState(checked);
+   const [isCheckedState, setIsCheckedState] = useState(isChecked);
    const rowRef = useRef(null);
    const movieDescriptionRef = useRef(null);
    const movieControlRef = useRef(null);
+   const checkBoxRef = useRef(null);
 
    const handleShowControlMovie = () => {
       if (!showControlMovie) {
@@ -35,18 +36,21 @@ function RowMovie({ dataRow, checked = false }) {
       }
    };
 
-   const handleChecked = () => setCheckedState((prev) => !prev);
-
    useEffect(() => {
       rowRef.current.onmouseenter = () => {
          handleShowControlMovie();
       };
 
       rowRef.current.onmouseleave = () => {
-         console.log('haha', showControlMovie);
          handleHideControlMovie();
       };
+
+      // eslint-disable-next-line
    }, [showControlMovie]);
+
+   useEffect(() => {
+      setIsCheckedState(isChecked);
+   }, [isChecked]);
 
    return (
       <>
@@ -58,14 +62,18 @@ function RowMovie({ dataRow, checked = false }) {
                   minWidth: '33px',
                   cursor: 'pointer',
                }}
+               onClick={() => {
+                  setIsCheckedState((prev) => !prev);
+               }}
             >
                <input
+                  ref={checkBoxRef}
                   type="checkbox"
                   style={{
                      cursor: 'pointer',
                   }}
-                  onClick={handleChecked}
-                  checked={checkedState}
+                  checked={isCheckedState}
+                  onChange={() => {}}
                />
             </div>
             <div className={cx('table-col')} style={{ flex: '3 0 390px', minWidth: '390px' }}>
@@ -87,7 +95,7 @@ function RowMovie({ dataRow, checked = false }) {
                   </div>
                   <div className={cx('movie-right')}>
                      <div className={cx('movie-right_name')}>
-                        <Link to="#" name-tooltip={'Chi tiết'}>
+                        <Link to="#" nametooltip={'Chi tiết'}>
                            Kim Bình Bông Kim Bình BôngKim Bình BôngKim Bình BôngKim Bình BôngKim
                            Bình BôngKim Bình BôngKim Bình BôngKim Bình Bông
                         </Link>
@@ -97,13 +105,13 @@ function RowMovie({ dataRow, checked = false }) {
                         Phim hay nhất thế giới
                      </div>
                      <div className={cx('movie-right_controls')} ref={movieControlRef}>
-                        <div className={cx('controls-icon')} name-tooltip={'Chi tiết'}>
+                        <div className={cx('controls-icon')} nametooltip={'Chi tiết'}>
                            <LiaPencilAltSolid />
                         </div>
-                        <div className={cx('controls-icon')} name-tooltip={'Video'}>
+                        <div className={cx('controls-icon')} nametooltip={'Video'}>
                            <RiFolderVideoLine />
                         </div>
-                        <div className={cx('controls-icon')} name-tooltip={'Số liệu phân tích'}>
+                        <div className={cx('controls-icon')} nametooltip={'Số liệu phân tích'}>
                            <AiOutlineBarChart />
                         </div>
                      </div>
@@ -111,7 +119,11 @@ function RowMovie({ dataRow, checked = false }) {
                </div>
             </div>
             <div className={cx('table-col')} style={{ flex: '2 0 90px', minWidth: '90px' }}>
-               <div className={cx('category')}>Hoạt hình trung quốc</div>
+               <div className={cx('category')}>
+                  [Hoạt hình trung quốc] / [Tu tiên] / [Siêu nhiên] / [Giả tưởng] / [Hoạt hình trung
+                  quốc] / [Tu tiên] / [Siêu nhiên] / [Giả tưởng] / [Hoạt hình trung quốc] / [Tu
+                  tiên] / [Siêu nhiên] / [Giả tưởng]
+               </div>
             </div>
             <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
                <div className={cx('status')}>Đang hiển thị</div>

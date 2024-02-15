@@ -24,10 +24,10 @@ function Short() {
 
             <div className={cx('filter-list')}>
                <div className={cx('filter-item')}>
-                  <div className={cx('filter-item-title')} name-tooltip={'Tiêu đề có chứa "a"'}>
+                  <div className={cx('filter-item-title')} nametooltip={'Tiêu đề có chứa "a"'}>
                      Tiêu đề: "ok la"
                   </div>
-                  <div className={cx('filter-item-icon')} name-tooltip={'Loại bỏ'}>
+                  <div className={cx('filter-item-icon')} nametooltip={'Loại bỏ'}>
                      <FaRegCircleXmark></FaRegCircleXmark>
                   </div>
                </div>

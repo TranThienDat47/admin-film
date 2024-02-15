@@ -14,7 +14,7 @@ const cx = classNames.bind(style);
 function ProductLayout({ children }) {
    const currentPath = window.location.pathname;
 
-   var tempDataItnitState = [
+   var tempDataItnitStateChildren = [
       {
          id: 1,
          icon: BiCategory,
@@ -37,28 +37,28 @@ function ProductLayout({ children }) {
       },
    ];
 
-   // tempDataItnitState = tempDataItnitState.map((element) => {
-   //    if (element.href.length === 1) {
-   //       if (
-   //          element.href &&
-   //          element.href.includes(currentPath) &&
-   //          currentPath.length === element.href.length
-   //       ) {
-   //          element.active = true;
-   //       } else {
-   //          element.active = false;
-   //       }
-   //    } else {
-   //       if (element.href && element.href.includes(currentPath)) {
-   //          element.active = true;
-   //       } else {
-   //          element.active = false;
-   //       }
-   //    }
-   //    return element;
-   // });
+   tempDataItnitStateChildren = tempDataItnitStateChildren.map((element) => {
+      if (element.href && element.href.length === 1) {
+         if (element.href.includes(currentPath) && currentPath.length === element.href[0].length) {
+            element.active = true;
+         } else {
+            element.active = false;
+         }
+      } else {
+         if (element.href && element.href.includes(currentPath)) {
+            element.active = true;
+         } else {
+            element.active = false;
+         }
+      }
+      return element;
+   });
 
-   const [dataInitState, setDataInitState] = useState(tempDataItnitState);
+   const [dataInitState, setDataInitState] = useState(tempDataItnitStateChildren);
+
+   useEffect(() => {
+      setDataInitState(tempDataItnitStateChildren);
+   }, [currentPath]);
 
    const handleClickItemSideBar = (dataTemp) => {
       setDataInitState((prev) =>
@@ -93,6 +93,7 @@ function ProductLayout({ children }) {
                            onClick={() => {
                               handleClickItemSideBar(elment);
                            }}
+                           className={cx('ref-item-sidebar')}
                         >
                            <RipleAnimation className={cx('wrapper-riple-animation')}>
                               <div
