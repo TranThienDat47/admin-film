@@ -103,6 +103,10 @@
       padding-left: 6px;
    }
 
+   & > div:last-child {
+      padding-left: 0;
+   }
+
    & > div:first-child {
       display: flex;
       align-items: center;
@@ -263,6 +267,7 @@
    display: none;
 
    & > .controls-icon {
+      color: var(--text-bland);
       display: flex;
       font-size: 2.9rem;
       padding: 6px;

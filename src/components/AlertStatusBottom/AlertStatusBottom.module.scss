@@ -1,0 +1,48 @@
+.wrapper {
+   position: fixed;
+   bottom: 0;
+
+   width: 276px;
+   height: 66px;
+
+   background-color: #424343;
+   color: var(--white);
+   font-size: 1.9rem;
+   line-height: 1.9rem;
+
+   border-top-right-radius: 3px;
+   border-top-left-radius: 3px;
+   padding: 16px 26px;
+
+   box-shadow: 0 0 3px 1px var(--box-shadow-color);
+
+   z-index: 100000;
+
+   overflow: hidden;
+
+   display: flex;
+   justify-content: left;
+   align-items: center;
+
+   transform: translateY(0);
+
+   animation: message ease-in-out 0.6s;
+
+   .message {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+   }
+}
+
+@keyframes message {
+   0% {
+      transform: translateY(100%);
+   }
+   90% {
+      transform: translateY(0);
+   }
+   100% {
+      transform: translateY(0);
+   }
+}

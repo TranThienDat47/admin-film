@@ -3,7 +3,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 're
 import { Link } from 'react-router-dom';
 import imgs from '~/assets/img';
 import config from '~/config';
-import styles from './HeaderSidebar.module.scss';
+import styles from './Sidebar.module.scss';
 import { AiOutlineBarChart, AiOutlineCheck } from 'react-icons/ai';
 import { MdOutlineVideoSettings } from 'react-icons/md';
 import { BiCommentDetail } from 'react-icons/bi';
@@ -18,7 +18,7 @@ import { BiCategory } from 'react-icons/bi';
 
 const cx = classNames.bind(styles);
 
-const HeaderSidebar = forwardRef((prop, ref) => {
+const Sidebar = forwardRef((prop, ref) => {
    const navRef = useRef();
    const pseudoRef = useRef();
    const moveNavRef = useRef(false);
@@ -158,10 +158,6 @@ const HeaderSidebar = forwardRef((prop, ref) => {
       };
    }, [dataInitState]);
 
-   useImperativeHandle(ref, () => ({
-      showAndHide() {},
-   }));
-
    return (
       <>
          <div className={cx('nav')} ref={navRef}>
@@ -202,15 +198,9 @@ const HeaderSidebar = forwardRef((prop, ref) => {
                ))}
             </div>
          </div>
-         <div
-            className={cx('pseudo')}
-            ref={pseudoRef}
-            onClick={() => {
-               setShowNav((prev) => !prev);
-            }}
-         ></div>
+         <div className={cx('pseudo')} ref={pseudoRef}></div>
       </>
    );
 });
 
-export default HeaderSidebar;
+export default Sidebar;

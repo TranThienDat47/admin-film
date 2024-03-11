@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
-function RowMovie({ dataRow, isChecked = false, onCheckboxChange = () => {} }) {
+function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {} }) {
    const [showControlMovie, setShowControlMovie] = useState(false);
    const [isCheckedState, setIsCheckedState] = useState(isChecked);
    const rowRef = useRef(null);
@@ -52,6 +52,19 @@ function RowMovie({ dataRow, isChecked = false, onCheckboxChange = () => {} }) {
       setIsCheckedState(isChecked);
    }, [isChecked]);
 
+   const formatTime = (inputTime) => {
+      const date = new Date(inputTime);
+
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+
+      return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+   };
+
    return (
       <>
          <div ref={rowRef} className={cx('table-row')}>
@@ -80,13 +93,12 @@ function RowMovie({ dataRow, isChecked = false, onCheckboxChange = () => {} }) {
                <div className={cx('movie')}>
                   <div className={cx('movie-left')}>
                      <div className={cx('wrapper-image-movie')}>
-                        <img
-                           src="https://vcdn1-vnexpress.vnecdn.net/2019/07/30/anh-thien-nhien-dep-thang-7-1564483719.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=Nl3znv-VRtPyhJYhLwwRfA"
-                           alt=""
-                        />
+                        <img src={dataRow.img} alt="" />
 
                         <div className={cx('layer')}>
-                           <span>0</span>
+                           <span>
+                              {dataRow.currentEpisodes === '??' ? '0' : dataRow.currentEpisodes}
+                           </span>
                            <div className={cx('layer-icon')}>
                               <MdPlaylistPlay></MdPlaylistPlay>
                            </div>
@@ -96,18 +108,23 @@ function RowMovie({ dataRow, isChecked = false, onCheckboxChange = () => {} }) {
                   <div className={cx('movie-right')}>
                      <div className={cx('movie-right_name')}>
                         <Link to="#" nametooltip={'Chi tiết'}>
-                           Kim Bình Bông Kim Bình BôngKim Bình BôngKim Bình BôngKim Bình BôngKim
-                           Bình BôngKim Bình BôngKim Bình BôngKim Bình Bông
+                           {dataRow._name}
                         </Link>
                      </div>
 
                      <div className={cx('movie-right_description')} ref={movieDescriptionRef}>
-                        Phim hay nhất thế giới
+                        {dataRow.description}
                      </div>
                      <div className={cx('movie-right_controls')} ref={movieControlRef}>
-                        <div className={cx('controls-icon')} nametooltip={'Chi tiết'}>
-                           <LiaPencilAltSolid />
-                        </div>
+                        <Link
+                           to="/product/details"
+                           className={cx('controls-icon')}
+                           nametooltip={'Chi tiết'}
+                        >
+                           <div>
+                              <LiaPencilAltSolid />
+                           </div>
+                        </Link>
                         <div className={cx('controls-icon')} nametooltip={'Video'}>
                            <RiFolderVideoLine />
                         </div>
@@ -120,19 +137,20 @@ function RowMovie({ dataRow, isChecked = false, onCheckboxChange = () => {} }) {
             </div>
             <div className={cx('table-col')} style={{ flex: '2 0 90px', minWidth: '90px' }}>
                <div className={cx('category')}>
-                  [Hoạt hình trung quốc] / [Tu tiên] / [Siêu nhiên] / [Giả tưởng] / [Hoạt hình trung
-                  quốc] / [Tu tiên] / [Siêu nhiên] / [Giả tưởng] / [Hoạt hình trung quốc] / [Tu
-                  tiên] / [Siêu nhiên] / [Giả tưởng]
+                  {dataRow.categories &&
+                     dataRow.categories.map((element, index) =>
+                        index === 0 ? `[${element.title}]` : ` / [${element.title}]`,
+                     )}
                </div>
             </div>
             <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
-               <div className={cx('status')}>Đang hiển thị</div>
+               <div className={cx('status')}>{dataRow._status}</div>
             </div>
             <div className={cx('table-col')} style={{ flex: '1 0 90px', minWidth: '90px' }}>
-               <div className={cx('recent')}>10/01/2002 00:00:00</div>
+               <div className={cx('recent')}>{formatTime(dataRow.releaseDate)}</div>
             </div>
-            <div className={cx('table-col')} style={{ flex: '0 0 60px', minWidth: '100px' }}>
-               <div className={cx('count_episodes')}>12</div>
+            <div className={cx('table-col')} style={{ flex: '0.5 0 69px', minWidth: '100px' }}>
+               <div className={cx('count_episodes')}>{dataRow.episodes}</div>
             </div>
          </div>
       </>

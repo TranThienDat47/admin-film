@@ -29,8 +29,6 @@ function Menu({ children, items = [], hideOnClick = false, className }) {
                   } else {
                      item.onChange();
                   }
-
-                  wrapperRef.current.click();
                }}
             />
          );

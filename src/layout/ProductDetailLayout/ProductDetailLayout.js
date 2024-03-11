@@ -1,16 +1,16 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import Header from '../compoments/Header';
-import styles from './Default.module.scss';
-import Sidebar from '~/layout/compoments/Sidebar';
+import styles from './ProductDetailLayout.module.scss';
+import SidebarProductDetail from '../compoments/SidebarProductDetail';
 
 const cx = classNames.bind(styles);
 
-function DefaultLayout({ children }) {
+function ProductDetailLayout({ children }) {
    return (
       <div className={cx('wrapper')}>
          <Header />
-         <Sidebar />
+         <SidebarProductDetail />
          <div className={cx('container')}>
             <div className={cx('content')}>{children}</div>
          </div>
@@ -18,8 +18,8 @@ function DefaultLayout({ children }) {
    );
 }
 
-DefaultLayout.propTypes = {
+ProductDetailLayout.propTypes = {
    children: PropTypes.node.isRequired,
 };
 
-export default DefaultLayout;
+export default ProductDetailLayout;

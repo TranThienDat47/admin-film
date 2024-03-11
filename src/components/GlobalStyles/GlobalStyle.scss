@@ -26,12 +26,16 @@
    --hover-color-dark: rgba(32, 35, 48, 0.16);
    --hover-color-light: rgba(255, 255, 255, 0.19);
 
-   --took-tip-color: rgba(23, 26, 39, 0.59);
+   --tooltip-color: rgba(23, 26, 39, 0.59);
    --aria-color: #c3c9cb30;
 
    --default-layout-header-height: 60px;
    --default-layout-width: 1150px;
    --font-family: Arial, sans-serif;
+
+   //loading
+   --loading-fetch-color: rgba(23, 26, 39, 0.3);
+   --modal-loading: rgba(253, 253, 253, 0.39);
 
    --width-default-sidebar: 73px;
    --width-navbar-default: 240px;

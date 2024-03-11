@@ -12,31 +12,32 @@ const Button = forwardRef(
       {
          to,
          href,
-         className,
-         leftIcon,
          color,
+         leftIcon,
+         rightIcon,
+         className,
          borderColor,
          borderRadius,
          fontSize = '1.6',
-         rightIcon,
-         transparent = false,
-         normal = false,
+         fullWidth = false,
          grey = false,
+         text = false,
+         hover = false,
+         small = false,
+         large = false,
+         medium = false,
+         normal = false,
          primary = false,
          outline = false,
          disable = false,
          rounded = false,
-         text = false,
          onlyText = false,
-         hover = false,
-         small = false,
-         medium = false,
-         large = false,
-         children,
-         onClick,
-         backgroundColor,
+         transparent = false,
          ripleAnimation = false,
          ripleAnimationLight = false,
+         onClick,
+         children,
+         backgroundColor,
          ...passProp
       },
       ref,
@@ -125,6 +126,7 @@ const Button = forwardRef(
          borderRadius,
          primary,
          grey,
+         fullWidth,
          outline,
          text,
          onlyText,
@@ -144,14 +146,15 @@ const Button = forwardRef(
          <div
             ref={ref}
             className={classes}
-            {...props}
             style={{
                backgroundColor: backgroundColor,
                fontSize: `${fontSize}rem`,
                color: color,
                borderColor: borderColor,
                borderRadius: borderRadius,
+               aspectRatio: fullWidth ? '1/1' : `unset`,
             }}
+            {...props}
          >
             <Comp ref={itemRef} className={cx('inner')}>
                {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
@@ -163,7 +166,10 @@ const Button = forwardRef(
                <RipleAnimation
                   light={ripleAnimationLight}
                   className={cx('ripple-amination')}
-               ></RipleAnimation>
+                  style={{
+                     borderRadius: borderRadius,
+                  }}
+               />
             )}
          </div>
       );
@@ -182,6 +188,7 @@ Button.propTypes = {
    rightIcon: PropTypes.node,
    primary: PropTypes.bool,
    grey: PropTypes.bool,
+   fullWidth: PropTypes.bool,
    outline: PropTypes.bool,
    disable: PropTypes.bool,
    rounded: PropTypes.bool,

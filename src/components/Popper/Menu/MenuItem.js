@@ -12,15 +12,16 @@ function MenuItem({ data, onClick, small }) {
       small,
    });
    return (
-      <Button
-         className={classes}
-         to={data.to}
-         leftIcon={data.left_icon}
-         rightIcon={data.right_icon}
-         onClick={onClick}
-      >
-         {data.title}
-      </Button>
+      <div className={classes}>
+         <Button
+            to={data.to}
+            leftIcon={data.left_icon}
+            rightIcon={data.right_icon}
+            onClick={onClick}
+         >
+            {data.title}
+         </Button>
+      </div>
    );
 }
 

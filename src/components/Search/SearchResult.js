@@ -1,6 +1,4 @@
 import { memo, useCallback, useEffect, useRef, useState, useContext } from 'react';
-// import { ProductItemSmall } from '~/components/ProductItem';
-// import { ProductContext } from '~/contexts/product';
 
 function SearchResult({ result = [], ...passProp }) {
    // const { loadTempSelectSearchResult } = useContext(ProductContext);

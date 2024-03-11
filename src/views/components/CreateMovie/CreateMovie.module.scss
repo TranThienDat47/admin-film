@@ -31,7 +31,7 @@ input::-webkit-calendar-picker-indicator {
    input {
       border: 1px solid var(--border-color);
       border-radius: 9px;
-      padding: 6px 9px;
+      padding: 6px 13px;
       line-height: 2.3rem;
    }
 
@@ -43,6 +43,7 @@ input::-webkit-calendar-picker-indicator {
    }
 
    .inner {
+      position: relative;
       overflow: hidden;
 
       display: flex;
@@ -63,25 +64,33 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .inner {
+   .modal-loading {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: var(--modal-loading);
+   }
    .header {
-      flex: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.9rem;
-      font-weight: 550;
-      padding: 13px 16px;
-      border-bottom: 1px solid var(--border-color);
-
-      .header-right-icon {
+      .header-top {
+         flex: 0;
          display: flex;
+         justify-content: space-between;
          align-items: center;
-         justify-content: center;
-         font-size: 2.6rem;
-         padding: 6px;
-         cursor: pointer;
-         user-select: none;
-         -webkit-user-drag: none;
+         font-size: 1.9rem;
+         font-weight: 550;
+         padding: 13px 16px;
+         border-bottom: 1px solid var(--border-color);
+
+         .header-right-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.6rem;
+            padding: 6px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-drag: none;
+         }
       }
    }
 
@@ -136,11 +145,6 @@ input::-webkit-calendar-picker-indicator {
 
       .inner-content-category {
          margin-top: 19px;
-
-         // & > div {
-         //    border-radius: 6px;
-         //    border: 1px solid var(--border-color);
-         // }
       }
    }
 
@@ -190,6 +194,11 @@ input::-webkit-calendar-picker-indicator {
          display: flex;
          justify-content: center;
          margin-top: 23px;
+
+         & * {
+            -webkit-user-drag: none;
+            user-select: none;
+         }
       }
       .wrapper-image {
          position: relative;
@@ -205,18 +214,22 @@ input::-webkit-calendar-picker-indicator {
             background-color: transparent;
          }
 
-         & > img {
+         & > .main-image {
             height: 100%;
             width: 100%;
-            object-fit: cover;
             cursor: pointer;
             -webkit-user-drag: none;
+            user-select: none;
             display: block;
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
             right: 0;
+
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: 50% 50%;
          }
 
          .choose-file {
@@ -226,6 +239,8 @@ input::-webkit-calendar-picker-indicator {
          }
 
          .upload-image {
+            user-select: none;
+            -webkit-user-drag: none;
             position: absolute;
             top: 50%;
             transform: translateX(-50%) translateY(-50%);
@@ -271,6 +286,122 @@ input::-webkit-calendar-picker-indicator {
 
          .wrapper-upload-drag-btn {
             margin-top: 19px;
+         }
+
+         .control-setup-button-close {
+            cursor: pointer;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+
+            background-color: var(--tooltip-color);
+            color: var(--white);
+            font-size: 2.3rem;
+            border-radius: 9999px;
+            padding: 3px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+
+         .control-setup-transfrom-wrapper {
+            user-select: none;
+            -webkit-user-drag: none;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 39px;
+            border-radius: 3px;
+            background-color: var(--modal-color);
+
+            color: var(--white);
+            font-size: 2.3rem;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & > * {
+               cursor: pointer;
+               display: flex;
+               align-items: center;
+               user-select: none;
+               -webkit-user-drag: none;
+            }
+
+            .control-setup-transfrom-inner {
+               position: relative;
+               border-radius: 3px;
+               width: 100px;
+               margin: 0 16px;
+               background-color: aliceblue;
+               user-select: none;
+               -webkit-user-drag: none;
+               transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1),
+                  -webkit-transform 0.1s cubic-bezier(0.4, 0, 1, 1);
+
+               .control-setup-transfrom-main {
+                  width: 100%;
+                  height: 6px;
+                  box-shadow: inset 0 0 3px 1px var(--box-shadow-color);
+                  border-radius: 3px;
+                  user-select: none;
+                  -webkit-user-drag: none;
+               }
+
+               .control-setup-transfrom-middle {
+                  position: absolute;
+                  width: 1px;
+                  height: 100%;
+                  left: calc(50%);
+                  top: 0;
+                  transform: translateX(-50%);
+                  border: 1px solid var(--border-color);
+                  background-color: var(--border-color);
+                  box-shadow: unset;
+                  user-select: none;
+                  -webkit-user-drag: none;
+               }
+
+               .control-setup-transfrom-ball {
+                  position: relative;
+                  cursor: grabbing;
+                  position: absolute;
+                  background-color: var(--white);
+                  border: 1px solid var(--border-color);
+                  width: 14px;
+                  aspect-ratio: 1/1;
+                  border-radius: 9999px;
+                  box-shadow: 0 1px 3px 1px var(--box-shadow-color);
+                  top: 50%;
+                  transform: translateY(-50%) translateX(0);
+                  left: -7px;
+
+                  user-select: none;
+                  -webkit-user-drag: none;
+                  z-index: 10;
+
+                  transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1),
+                     -webkit-transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+
+                  &::after {
+                     content: attr(scalevalue);
+                     color: var(--white);
+                     font-size: 1.4rem;
+                     font-weight: 550;
+                     padding: 3px 9px;
+                     background-color: var(--tooltip-color);
+                     position: absolute;
+                     bottom: calc(100% + 13px);
+                     left: 50%;
+                     transform: translateX(-50%);
+                     border-radius: 3px;
+                     user-select: none;
+                     -webkit-user-drag: none;
+                  }
+               }
+            }
          }
       }
 

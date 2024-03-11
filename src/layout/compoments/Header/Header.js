@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext, Fragment } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import classNames from 'classnames/bind';
 
 import { AuthContext } from '~/contexts/auth';
@@ -8,7 +8,6 @@ import imgs from '~/assets/img';
 import Search from '~/components/Search';
 import Button from '~/components/Button';
 import styles from './Header.module.scss';
-import HeaderSidebar from './HeaderSidebar';
 import Menu from '~/components/Popper/Menu';
 import { RiVideoAddLine } from 'react-icons/ri';
 
@@ -25,7 +24,6 @@ import {
 
 import { IoLanguageOutline } from 'react-icons/io5';
 import { RiSettingsLine } from 'react-icons/ri';
-import RipleAnimation from '~/components/RipleAnimation';
 
 import { RiVideoUploadLine } from 'react-icons/ri';
 import { MdOutlineVideoSettings } from 'react-icons/md';
@@ -108,8 +106,6 @@ function Header() {
    ]);
 
    const notificationResultRef = useRef();
-
-   const childRef = useRef(null);
 
    useEffect(() => {
       if (user) {
@@ -212,20 +208,13 @@ function Header() {
       };
    }, [notificationResultRef]);
 
-   const handleTemp = () => {
-      console.log('oiaisjiodf');
-   };
+   const handleTemp = () => {};
 
    return (
       <>
          <header className={cx('wrapper')}>
             <div className={cx('nav')}>
-               <AiOutlineMenu
-                  className={cx('nav-icon')}
-                  onClick={(e) => {
-                     childRef.current.showAndHide();
-                  }}
-               />
+               <AiOutlineMenu className={cx('nav-icon')} />
                <a href={config.routes.home} className={cx('logo-link')}>
                   <img src={imgs.logo} alt="Blog" />
                </a>
@@ -278,14 +267,13 @@ function Header() {
                </div>
             </div>
          </header>
-         <HeaderSidebar ref={childRef} />
-         {showCreateState === 1 && (
-            <CreateMovie
-               handleClose={() => {
-                  setShowCreateState(0);
-               }}
-            ></CreateMovie>
-         )}
+         {/* <HeaderSidebar ref={childRef} /> */}
+         <CreateMovie
+            handleClose={() => {
+               setShowCreateState(0);
+            }}
+            hidden={showCreateState !== 1}
+         />
       </>
    );
 }

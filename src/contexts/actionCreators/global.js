@@ -3,9 +3,13 @@ const fetchProductCurrentRequest = () => ({
    payload: {},
 });
 
-const fetchProductCurrentSuccess = ({ productCurrent }) => ({
+const fetchProductCurrentSuccess = ({
+   productCurrent,
+   ableLoadingMoreProduct,
+   pageProductCurrent,
+}) => ({
    type: 'FETCH_PRODUCT_CURRENT_SUCCESS',
-   payload: { productCurrent },
+   payload: { productCurrent, ableLoadingMoreProduct, pageProductCurrent },
 });
 
 const fetchProductCurrentFailure = ({ error }) => ({

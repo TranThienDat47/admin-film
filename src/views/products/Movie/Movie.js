@@ -13,24 +13,42 @@ import {
    CgPushChevronRight,
 } from 'react-icons/cg';
 
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RowMovie from './RowMovie';
 import RipleAnimation from '~/components/RipleAnimation';
+import { GlobalContext } from '~/contexts/global';
 
 const cx = classNames.bind(style);
 
 function Movie() {
+   const {
+      globalState: { productCurrent, pageProductCurrent, ableLoadingMoreProduct },
+      loadProduct,
+   } = useContext(GlobalContext);
+
    const searchInputRef = useRef(null);
    const checkBoxRef = useRef(null);
 
-   const [listMoviesState, setListMoviesState] = useState(Array(12).fill(0));
+   const [listMoviesState, setListMoviesState] = useState([]);
 
    const [isAllChecked, setAllChecked] = useState(false);
 
    const handleAllCheckboxChange = () => {
       setAllChecked(!isAllChecked);
    };
+
+   useEffect(() => {
+      if (productCurrent.length <= 0) {
+         loadProduct().then(() => {});
+      }
+   }, []);
+
+   useEffect(() => {
+      setListMoviesState(productCurrent);
+
+      console.log(productCurrent);
+   }, [productCurrent]);
 
    return (
       <>
@@ -112,13 +130,17 @@ function Movie() {
                         <MdArrowUpward></MdArrowUpward>
                      </div>
                   </div>
-                  <div className={cx('table-col')} style={{ flex: '0 0 60px', minWidth: '100px' }}>
+                  <div
+                     className={cx('table-col')}
+                     style={{ flex: '0.5 0 69px', minWidth: '100px' }}
+                  >
                      Số tập hiện tại
                   </div>
                </div>
                <div className={cx('table-content')}>
                   {listMoviesState.map((element, index) => (
                      <RowMovie
+                        dataRow={element}
                         key={index}
                         isChecked={isAllChecked}
                         onCheckboxChange={handleAllCheckboxChange}

@@ -16,25 +16,36 @@ export { GlobalContext };
 const GlobalContextProvider = ({ children }) => {
    const [globalState, dispatch] = useReducer(globalReducer, initialState);
 
-   const setProductCurrent = async ({ _id }) => {
+   const loadProduct = async (recently = 1) => {
       dispatch(fetchProductCurrentRequest());
 
-      const response = await ProductServices.show({ product_id: _id });
-
-      if (response.success)
-         dispatch(
-            fetchProductCurrentSuccess({
-               productCurrent: {
-                  product: response.products,
-                  product_details: response.productDetails,
-               },
-            }),
-         );
-      else {
-      }
+      await ProductServices.get({
+         skip: globalState.maxLengthOfPageProduct * globalState.pageProductCurrent,
+         limit: globalState.maxLengthOfPageProduct,
+         key: '',
+         recently,
+      })
+         .then((data) => {
+            console.log(data);
+            if (data.success) {
+               dispatch({
+                  type: 'FETCH_PRODUCT_CURRENT_SUCCESS',
+                  payload: {
+                     productCurrent: data.products,
+                     ableLoadingMoreProduct: false,
+                     pageProductCurrent: globalState.pageProductCurrent + 1,
+                  },
+               });
+            } else {
+               dispatch(fetchProductCurrentFailure(data.message));
+            }
+         })
+         .catch((error) => {
+            dispatch(fetchProductCurrentFailure(error.message));
+         });
    };
 
-   const globalContextData = { globalState, setProductCurrent };
+   const globalContextData = { globalState, loadProduct };
 
    return <GlobalContext.Provider value={globalContextData}> {children}</GlobalContext.Provider>;
 };
