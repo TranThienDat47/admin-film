@@ -29,9 +29,10 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
          title: 'Chi tiết',
          active: false,
          href:
-            routes.home !== null && typeof routes.home === 'object'
-               ? Object.values(routes.home)
-               : [routes.home],
+            routes.product_detail.detail !== null &&
+            typeof routes.product_detail.detail === 'object'
+               ? Object.values(routes.product_detail.detail)
+               : [routes.product_detail.detail],
       },
       {
          id: 2,
@@ -39,9 +40,9 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
          title: 'Tập phim',
          active: true,
          href:
-            routes.product !== null && typeof routes.product === 'object'
-               ? Object.values(routes.product)
-               : [routes.product],
+            routes.product_detail.video !== null && typeof routes.product_detail.video === 'object'
+               ? Object.values(routes.product_detail.video)
+               : [routes.product_detail.video],
       },
       {
          id: 3,
@@ -49,9 +50,10 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
          title: 'Số liệu phân tích',
          active: false,
          href:
-            routes.analyst !== null && typeof routes.analyst === 'object'
-               ? Object.values(routes.analyst)
-               : [routes.analyst],
+            routes.product_detail.analyst !== null &&
+            typeof routes.product_detail.analyst === 'object'
+               ? Object.values(routes.product_detail.analyst)
+               : [routes.product_detail.analyst],
       },
    ];
 

@@ -1,8 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './Input.module.scss';
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
+
+const MAX_LENTH_INPUT = 120000;
 
 const Input = forwardRef(
    (
@@ -30,7 +32,18 @@ const Input = forwardRef(
       const prevStatusRef = useRef(0);
 
       const handleTypingInput = (e) => {
-         setValueState(e.target.textContent);
+         if (inputRef.current.textContent.length <= MAX_LENTH_INPUT) {
+            setValueState(e.target.textContent);
+         } else {
+            if (valueState.length === MAX_LENTH_INPUT) {
+               e.target.textContent = valueState;
+               setFocusAtEnd();
+            } else {
+               setValueState(e.target.textContent.substring(0, MAX_LENTH_INPUT));
+
+               e.target.textContent = valueState;
+            }
+         }
       };
 
       useEffect(() => {
@@ -39,15 +52,29 @@ const Input = forwardRef(
       }, [valueState]);
 
       useEffect(() => {
-         inputRef.current.textContent = value;
+         if (inputRef.current.textContent.length <= MAX_LENTH_INPUT) {
+            inputRef.current.textContent = value;
+         } else inputRef.current.textContent = value.substring(0, MAX_LENTH_INPUT - 1);
       }, [value]);
 
       useImperativeHandle(ref, () => ({
          setDefaultInput: () => {
-            inputRef.current.focus();
+            setFocusAtEnd();
             inputRef.current.textContent = '';
          },
       }));
+
+      const setFocusAtEnd = () => {
+         const range = document.createRange();
+         const selection = window.getSelection();
+
+         range.selectNodeContents(inputRef.current);
+         range.collapse(false);
+         selection.removeAllRanges();
+         selection.addRange(range);
+
+         inputRef.current.focus();
+      };
 
       return (
          <div
@@ -106,4 +133,4 @@ const Input = forwardRef(
    },
 );
 
-export default Input;
+export default React.memo(Input);

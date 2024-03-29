@@ -33,6 +33,9 @@
    --default-layout-width: 1150px;
    --font-family: Arial, sans-serif;
 
+   //header
+   --height-header-product-detail: 79px;
+
    //loading
    --loading-fetch-color: rgba(23, 26, 39, 0.3);
    --modal-loading: rgba(253, 253, 253, 0.39);
@@ -59,7 +62,7 @@
    --height-loading-more: 63px;
 
    //btn
-   --btn-submit: #1a73e8;
+   --btn-submit: rgb(23, 113, 219);
    --btn-submit-hover: #1268da;
 
    //link

@@ -231,18 +231,9 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
 
    const validateValue = () => {
       return new Promise((resolve, reject) => {
-         const { _name, description, _status, img, episodes, releaseDate, categories } =
-            dataSubmitState;
+         const { _name, description, _status, img, episodes, releaseDate, categories } = dataSubmitState;
 
-         if (
-            !_name ||
-            !description ||
-            !_status ||
-            !img ||
-            !episodes ||
-            !releaseDate ||
-            categories.length === 0
-         ) {
+         if (!_name || !description || !_status || !img || !episodes || !releaseDate || categories.length === 0) {
             resolve(false);
          } else {
             resolve(true);
@@ -297,9 +288,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                handleMouseUpImage(e);
             };
 
-            imageRef.current.style.backgroundImage = `url("${imageRef.current.getAttribute(
-               'srcimage',
-            )}")`;
+            imageRef.current.style.backgroundImage = `url("${imageRef.current.getAttribute('srcimage')}")`;
          }
 
          window.onmousemove = (e) => {
@@ -349,6 +338,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                               <div className={cx('wrapper-content-row')}>
                                  <div className={cx('inner-content-name')}>
                                     <Input
+                                       key="_name1"
                                        required
                                        maxRow={2}
                                        row={2}
@@ -366,6 +356,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                  </div>
                                  <div className={cx('inner-content-other_name')}>
                                     <Input
+                                       key="another_name1"
                                        maxRow={2}
                                        row={2}
                                        downTheLine={false}
@@ -382,6 +373,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                  </div>
                                  <div className={cx('inner-content-description')}>
                                     <Input
+                                       key="description1"
                                        maxRow={5}
                                        row={5}
                                        title="Mô tả"
@@ -418,8 +410,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                           onChangeValue={() => {
                                              setDataSubmitState((prev) => ({
                                                 ...prev,
-                                                categories:
-                                                   categoryChildRef.current.getChooseList(),
+                                                categories: categoryChildRef.current.getChooseList(),
                                              }));
                                           }}
                                           dataRecommend={[
@@ -479,11 +470,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                        <>
                                           <div
                                              ref={imageRef}
-                                             srcimage={
-                                                chooseFileState
-                                                   ? URL.createObjectURL(chooseFileState)
-                                                   : imgs.noImage
-                                             }
+                                             srcimage={chooseFileState ? URL.createObjectURL(chooseFileState) : imgs.noImage}
                                              className={cx('main-image')}
                                           ></div>
                                           <div
@@ -504,15 +491,8 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                                 <FiMinusCircle />
                                              </div>
                                              <div className={cx('control-setup-transfrom-inner')}>
-                                                <div
-                                                   ref={mainProgressRef}
-                                                   className={cx('control-setup-transfrom-main')}
-                                                >
-                                                   <div
-                                                      className={cx(
-                                                         'control-setup-transfrom-middle',
-                                                      )}
-                                                   ></div>
+                                                <div ref={mainProgressRef} className={cx('control-setup-transfrom-main')}>
+                                                   <div className={cx('control-setup-transfrom-middle')}></div>
                                                    <div
                                                       ref={ballRef}
                                                       scalevalue={infoImageState.scale + 'x'}
@@ -560,8 +540,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                           onChangeOption={() => {
                                              setDataSubmitState((prev) => ({
                                                 ...prev,
-                                                _status:
-                                                   statusChildRef.current.getOptionChoose().value,
+                                                _status: statusChildRef.current.getOptionChoose().value,
                                              }));
                                           }}
                                        />
@@ -581,8 +560,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                           onChangeOption={() => {
                                              setDataSubmitState((prev) => ({
                                                 ...prev,
-                                                country_Of_Origin:
-                                                   countryChildRef.current.getOptionChoose().value,
+                                                country_Of_Origin: countryChildRef.current.getOptionChoose().value,
                                              }));
                                           }}
                                        />
@@ -633,11 +611,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                  marginLeft: '9px',
                               }}
                            >
-                              <Button
-                                 onClick={handleSubmit}
-                                 ripleAnimation
-                                 {...(ableCreateState ? { primary: true } : { disable: true })}
-                              >
+                              <Button onClick={handleSubmit} ripleAnimation {...(ableCreateState ? { primary: true } : { disable: true })}>
                                  Tạo
                               </Button>
                            </div>

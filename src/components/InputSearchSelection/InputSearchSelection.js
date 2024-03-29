@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './InputSearchSelection.module.scss';
 import { FaRegCircleXmark } from 'react-icons/fa6';
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -177,4 +177,4 @@ const InputSearchSelection = forwardRef(
    },
 );
 
-export default InputSearchSelection;
+export default memo(InputSearchSelection);

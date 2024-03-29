@@ -1,5 +1,7 @@
 :root {
-   --width-movie-image: 113px;
+   --width-episodes-image: 113px;
+   // --height-header-product-detail: 76px;
+
    --first-col: 43px;
    --second-col: 390px;
    --third-col: 90px;
@@ -7,7 +9,69 @@
    --fifth-col: 143px;
    --sixth-col: 69px;
 }
+
+.wrapper {
+   height: 100%;
+   overflow: auto;
+}
+
+.inner {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+
+   margin: auto;
+   height: 100%;
+}
+
+.separator {
+   width: 100%;
+   height: 1.3px;
+   background-color: rgba(0, 0, 0, 0.1);
+   margin: 6px 0 13px 0;
+   margin-top: 26px;
+}
+
+.main-content {
+}
+
+.main-content-top {
+   min-width: calc(var(--sixth-col) + var(--first-col) + var(--second-col) + var(--third-col) + var(--fourth-col) + var(--fifth-col));
+
+   height: var(--height-header-product-detail);
+   position: sticky;
+   width: calc(100%);
+   background-color: var(--white);
+   top: 0;
+   z-index: 1000;
+   display: flex;
+   justify-content: space-between;
+   padding: 0 16px;
+
+   // box-shadow: 3px 0 3px 1px var(--box-shadow-color);
+
+   .main-content-top-left {
+      display: flex;
+      align-items: center;
+      .header-title {
+         margin-left: 19px;
+         font-size: 2.5rem;
+      }
+   }
+
+   .main-content-top-right {
+      display: flex;
+      justify-content: space-between;
+      margin: 19px;
+   }
+}
+
 .filter {
+   position: sticky;
+   background-color: var(--white);
+   top: calc(var(--height-header-product-detail));
+   z-index: 1000;
+
    display: flex;
    align-items: center;
    width: 100%;
@@ -97,7 +161,7 @@
       display: flex;
       .table-col-icon {
          display: flex;
-         margin-left: 3px;
+         margin-left: 6px;
          align-items: center;
          justify-content: center;
       }
@@ -175,19 +239,19 @@
    }
 }
 
-.movie {
+.episodes {
    display: flex;
    padding: 9px;
    padding-left: 13px;
 
-   .wrapper-image-movie {
+   .wrapper-image-episodes {
       display: flex;
       flex-shrink: 0;
 
       position: relative;
       border-radius: 3px;
       overflow: hidden;
-      width: var(--width-movie-image);
+      width: var(--width-episodes-image);
 
       &::before {
          content: '';
@@ -244,13 +308,13 @@
       }
    }
 
-   .movie-right {
+   .episodes-right {
       margin-left: 16px;
       padding: 6px 0;
 
-      max-width: calc(100% - var(--width-movie-image));
+      max-width: calc(100% - var(--width-episodes-image));
 
-      .movie-right_name {
+      .episodes-right_name {
          white-space: nowrap;
          overflow: hidden;
          text-overflow: ellipsis;
@@ -261,7 +325,7 @@
          }
       }
 
-      .movie-right_description {
+      .episodes-right_description {
          font-size: 1.4rem;
          margin-top: 3px;
          display: block;
@@ -269,7 +333,7 @@
    }
 }
 
-.movie-right_controls {
+.episodes-right_controls {
    display: none;
 
    & > .controls-icon {

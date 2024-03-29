@@ -88,8 +88,8 @@ function Movie() {
                   <div
                      className={cx('table-col')}
                      style={{
-                        flex: '0 0 43px',
-                        minWidth: '33px',
+                        flex: '0 0 var(--first-col)',
+                        minWidth: 'var(--first-col)',
                         cursor: 'pointer',
                      }}
                      onClick={() => {
@@ -106,20 +106,29 @@ function Movie() {
                         onChange={() => {}}
                      />
                   </div>
-                  <div className={cx('table-col')} style={{ flex: '3 0 390px', minWidth: '390px' }}>
+                  <div
+                     className={cx('table-col')}
+                     style={{ flex: '3 0 var(--second-col)', minWidth: 'var(--second-col)' }}
+                  >
                      Phim
                   </div>
-                  <div className={cx('table-col')} style={{ flex: '2 0 90px', minWidth: '90px' }}>
+                  <div
+                     className={cx('table-col')}
+                     style={{ flex: '2 0 var(--third-col)', minWidth: 'var(--third-col)' }}
+                  >
                      Thể loại
                   </div>
-                  <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
+                  <div
+                     className={cx('table-col')}
+                     style={{ flex: '0.5 0 var(--fourth-col)', minWidth: 'var(--fourth-col)' }}
+                  >
                      Trạng thái
                   </div>
                   <div
                      className={cx('table-col')}
                      style={{
-                        flex: '1 0 90px',
-                        minWidth: '90px',
+                        flex: '1 0 var(--fifth-col)',
+                        minWidth: 'var(--fifth-col)',
                         color: 'var(--text-color)',
                         cursor: 'pointer',
                         userSelect: 'none',
@@ -132,7 +141,7 @@ function Movie() {
                   </div>
                   <div
                      className={cx('table-col')}
-                     style={{ flex: '0.5 0 69px', minWidth: '100px' }}
+                     style={{ flex: '0.5 0 var(--sixth-col)', minWidth: 'var(--sixth-col)' }}
                   >
                      Số tập hiện tại
                   </div>

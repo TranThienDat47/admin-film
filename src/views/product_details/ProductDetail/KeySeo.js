@@ -9,7 +9,7 @@ import {
 } from 'react';
 
 import classNames from 'classnames/bind';
-import styles from './CreateMovie.module.scss';
+import styles from './ProductDetail.module.scss';
 
 import Input from '~/components/Input';
 import Button from '~/components/Button';

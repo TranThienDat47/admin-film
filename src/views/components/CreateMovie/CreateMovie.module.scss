@@ -338,8 +338,7 @@ input::-webkit-calendar-picker-indicator {
                background-color: aliceblue;
                user-select: none;
                -webkit-user-drag: none;
-               transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1),
-                  -webkit-transform 0.1s cubic-bezier(0.4, 0, 1, 1);
+               transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1), -webkit-transform 0.1s cubic-bezier(0.4, 0, 1, 1);
 
                .control-setup-transfrom-main {
                   width: 100%;
@@ -382,8 +381,7 @@ input::-webkit-calendar-picker-indicator {
                   -webkit-user-drag: none;
                   z-index: 10;
 
-                  transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1),
-                     -webkit-transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+                  transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.1s cubic-bezier(0, 0, 0.2, 1);
 
                   &::after {
                      content: attr(scalevalue);
@@ -416,6 +414,12 @@ input::-webkit-calendar-picker-indicator {
          }
          & > span {
             color: var(--text-bland);
+         }
+
+         display: flex;
+         & > *:not(span) {
+            flex: 1;
+            margin-left: 16px;
          }
       }
 

@@ -7,6 +7,8 @@ import {
    fetchProductCurrentRequest,
    fetchProductCurrentSuccess,
    fetchProductCurrentFailure,
+   setShowCreateEpisodesCreator,
+   setQueueTaskAddVideoCreator,
 } from '../actionCreators/global';
 
 const GlobalContext = createContext();
@@ -26,7 +28,6 @@ const GlobalContextProvider = ({ children }) => {
          recently,
       })
          .then((data) => {
-            console.log(data);
             if (data.success) {
                dispatch({
                   type: 'FETCH_PRODUCT_CURRENT_SUCCESS',
@@ -45,7 +46,15 @@ const GlobalContextProvider = ({ children }) => {
          });
    };
 
-   const globalContextData = { globalState, loadProduct };
+   const setShowCreateEpisodes = (showCreateEpisodesState) => {
+      dispatch(setShowCreateEpisodesCreator(showCreateEpisodesState));
+   };
+
+   const setQueueTaskAddVideo = (queueTaskAddVideoState) => {
+      dispatch(setQueueTaskAddVideoCreator(queueTaskAddVideoState));
+   };
+
+   const globalContextData = { globalState, loadProduct, setShowCreateEpisodes, setQueueTaskAddVideo };
 
    return <GlobalContext.Provider value={globalContextData}> {children}</GlobalContext.Provider>;
 };

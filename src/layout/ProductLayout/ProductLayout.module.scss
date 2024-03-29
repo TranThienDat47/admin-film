@@ -1,5 +1,12 @@
 :root {
    --max-width-left: 69%;
+
+   --first-col: 43px;
+   --second-col: 390px;
+   --third-col: 90px;
+   --fourth-col: 90px;
+   --fifth-col: 143px;
+   --sixth-col: 69px;
 }
 
 .wrapper-riple-animation {
@@ -14,6 +21,10 @@
 }
 
 .inner {
+   min-width: calc(
+      var(--sixth-col) + var(--first-col) + var(--second-col) + var(--third-col) + var(--fourth-col) +
+         var(--fifth-col)
+   );
    width: 100%;
    display: flex;
    flex-direction: column;

@@ -3,7 +3,7 @@ import styles from './Selection.module.scss';
 import RipleAnimation from '../RipleAnimation';
 
 import { MdArrowDropDown } from 'react-icons/md';
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import Option from './Option';
 
 const cx = classNames.bind(styles);
@@ -122,4 +122,4 @@ const Selection = forwardRef(
    },
 );
 
-export default Selection;
+export default memo(Selection);

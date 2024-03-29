@@ -4,14 +4,14 @@
    padding: 6px 13px;
    border-radius: 9px;
 
-   input {
-      border-radius: unset;
-      border: unset;
-      padding: 3px;
-   }
-
    .inner {
       display: flex;
+
+      input {
+         border-radius: unset;
+         border: unset;
+         padding: 3px;
+      }
 
       .title {
          padding: 0 16px 0 3px;

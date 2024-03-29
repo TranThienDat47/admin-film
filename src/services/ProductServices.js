@@ -38,6 +38,28 @@ class ProductServices {
          return { success: false, message: error.message };
       }
    }
+
+   async convert_video(formData = {}) {
+      function Decodeuint8arr(uint8array) {
+         return new TextDecoder('utf-8').decode(uint8array);
+      }
+      try {
+         const response = await fetch(`${apiUrl}/video/convert`, {
+            method: 'POST',
+            body: formData,
+         });
+
+         const reader = response.body.getReader();
+         while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            console.log(`Received: "${Decodeuint8arr(value)}"`);
+         }
+         return response.data;
+      } catch (error) {
+         return { success: false, message: error.message };
+      }
+   }
 }
 
 export default new ProductServices();

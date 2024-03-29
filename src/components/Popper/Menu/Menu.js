@@ -10,8 +10,28 @@ import { memo, useRef, useState } from 'react';
 const cx = classNames.bind(styles);
 const defaultFn = () => {};
 
+// {
+//    title: <div className={cx('title')}>Giao diện: Giao diện sáng</div>,
+//    left_icon: <AiOutlineThunderbolt className={cx('icon')} />,
+//    right_icon: <AiOutlineRight className={cx('icon')} />,
+//    children: {
+//       title: <div className={cx('title')}>Giao diện</div>,
+//       data: [
+//          {
+//             title: <div className={cx('title')}>Giao diện sáng</div>,
+//             left_icon: <AiOutlineCheck className={cx('icon')} />,
+//          },
+//          {
+//             title: <div className={cx('title')}>Giao diện tối</div>,
+//             left_icon: <div className={cx('icon')}></div>,
+//          },
+//       ],
+//    },
+//    separate: true,
+// },
 function Menu({ children, items = [], hideOnClick = false, className }) {
    const [history, setHistory] = useState([{ data: items }]);
+   const [visibleState, setVisibleState] = useState(false);
 
    const wrapperRef = useRef();
    const current = history[history.length - 1];
@@ -23,11 +43,19 @@ function Menu({ children, items = [], hideOnClick = false, className }) {
             <MenuItem
                key={index}
                data={item}
-               onClick={() => {
+               onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
                   if (isParent) {
                      setHistory((prev) => [...prev, item.children]);
                   } else {
-                     item.onChange();
+                     if (item.onChange) item.onChange();
+
+                     if (history.length === 1) {
+                        setVisibleState(false);
+                     } else {
+                        setHistory((prev) => prev.slice(0, prev.length - 1));
+                     }
                   }
                }}
             />
@@ -56,18 +84,26 @@ function Menu({ children, items = [], hideOnClick = false, className }) {
    };
 
    return (
-      <Tippy
-         interactive
-         hideOnClick={hideOnClick}
-         offset={[12, 8]}
-         placement="bottom-end"
-         render={renderResult}
-         onHide={handleResetMenu}
-         trigger="click"
-         ref={wrapperRef}
+      <div
+         onClick={() => {
+            setVisibleState(true);
+         }}
       >
-         {children}
-      </Tippy>
+         <Tippy
+            ref={wrapperRef}
+            interactive
+            visible={visibleState}
+            offset={[12, 8]}
+            placement="bottom-end"
+            onClickOutside={() => {
+               setVisibleState(false);
+            }}
+            onHide={handleResetMenu}
+            render={renderResult}
+         >
+            {children}
+         </Tippy>
+      </div>
    );
 }
 

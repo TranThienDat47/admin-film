@@ -21,6 +21,7 @@ import {
    AiOutlineCheck,
    AiOutlineMenu,
 } from 'react-icons/ai';
+import { ImFilm } from 'react-icons/im';
 
 import { IoLanguageOutline } from 'react-icons/io5';
 import { RiSettingsLine } from 'react-icons/ri';
@@ -28,6 +29,8 @@ import { RiSettingsLine } from 'react-icons/ri';
 import { RiVideoUploadLine } from 'react-icons/ri';
 import { MdOutlineVideoSettings } from 'react-icons/md';
 import CreateMovie from '~/views/components/CreateMovie';
+import CreateEpisodes from '~/views/components/CreateEpisodes';
+import { GlobalContext } from '~/contexts/global';
 
 const cx = classNames.bind(styles);
 
@@ -35,6 +38,11 @@ function Header() {
    const {
       authState: { isAuthenticated, isVerify, user },
    } = useContext(AuthContext);
+
+   const {
+      globalState: { showCreateEpisodesState },
+      setShowCreateEpisodes,
+   } = useContext(GlobalContext);
 
    const [showCreateState, setShowCreateState] = useState(0);
    const [showNotification, setShowNotification] = useState(false);
@@ -96,6 +104,7 @@ function Header() {
             setShowCreateState(1);
          },
       },
+
       {
          title: <div className={cx('title')}>Tải video ngắn lên</div>,
          left_icon: <MdOutlineVideoSettings className={cx('icon')} />,
@@ -104,6 +113,14 @@ function Header() {
          },
       },
    ]);
+
+   // {
+   //    title: <div className={cx('title')}>Thêm tập phim</div>,
+   //    left_icon: <ImFilm className={cx('icon')} />,
+   //    onChange: () => {
+   //       setShowCreateState(3);
+   //    },
+   // },
 
    const notificationResultRef = useRef();
 
@@ -193,10 +210,7 @@ function Header() {
 
    useEffect(() => {
       const handleClickOutside = (e) => {
-         if (
-            notificationResultRef.current &&
-            !notificationResultRef.current.parentNode.contains(e.target)
-         ) {
+         if (notificationResultRef.current && !notificationResultRef.current.parentNode.contains(e.target)) {
             setShowNotification(false);
          }
       };
@@ -226,32 +240,16 @@ function Header() {
 
             <div className={cx('infor')}>
                <div className={cx('infor-icon')}>
-                  <Menu
-                     items={dataInitCreate}
-                     key={'000'}
-                     hideOnClick={true}
-                     className={cx('wrapper-create')}
-                  >
+                  <Menu items={dataInitCreate} key={'000'} hideOnClick={true} className={cx('wrapper-create')}>
                      <div>
-                        <Button
-                           className={cx('infor-icon-inner')}
-                           ripleAnimation
-                           medium
-                           leftIcon={<RiVideoAddLine className={cx('icon-create')} />}
-                           outline
-                        >
+                        <Button className={cx('infor-icon-inner')} ripleAnimation medium leftIcon={<RiVideoAddLine className={cx('icon-create')} />} outline>
                            Tạo
                         </Button>
                      </div>
                   </Menu>
                </div>
                <div className={cx('infor-icon')}>
-                  <Menu
-                     items={dataInit}
-                     key={dataInit}
-                     hideOnClick={true}
-                     className={cx('wrapper-account')}
-                  >
+                  <Menu items={dataInit} key={dataInit} hideOnClick={true} className={cx('wrapper-account')}>
                      <button className={cx('user')}>
                         <img
                            src=""
@@ -273,6 +271,13 @@ function Header() {
                setShowCreateState(0);
             }}
             hidden={showCreateState !== 1}
+         />
+
+         <CreateEpisodes
+            handleClose={() => {
+               setShowCreateEpisodes(false);
+            }}
+            hidden={!showCreateEpisodesState}
          />
       </>
    );

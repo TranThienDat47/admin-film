@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import style from './Movie.module.scss';
+import style from './Episodes.module.scss';
 
 import { MdPlaylistPlay } from 'react-icons/md';
 
@@ -12,41 +12,41 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
-function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {} }) {
-   const [showControlMovie, setShowControlMovie] = useState(false);
+function RowEpisodes({ dataRow = {}, isChecked = false, onCheckboxChange = () => {} }) {
+   const [showControlEpisodes, setShowControlEpisodes] = useState(false);
    const [isCheckedState, setIsCheckedState] = useState(isChecked);
    const rowRef = useRef(null);
-   const movieDescriptionRef = useRef(null);
-   const movieControlRef = useRef(null);
+   const episodesDescriptionRef = useRef(null);
+   const episodesControlRef = useRef(null);
    const checkBoxRef = useRef(null);
 
-   const handleShowControlMovie = () => {
-      if (!showControlMovie) {
-         movieControlRef.current.style.display = 'flex';
-         movieDescriptionRef.current.style.display = 'none';
-         setShowControlMovie(true);
+   const handleShowControlEpisodes = () => {
+      if (!showControlEpisodes) {
+         episodesControlRef.current.style.display = 'flex';
+         episodesDescriptionRef.current.style.display = 'none';
+         setShowControlEpisodes(true);
       }
    };
 
-   const handleHideControlMovie = () => {
-      if (showControlMovie) {
-         movieControlRef.current.style.display = 'none';
-         movieDescriptionRef.current.style.display = 'block';
-         setShowControlMovie(false);
+   const handleHideControlEpisodes = () => {
+      if (showControlEpisodes) {
+         episodesControlRef.current.style.display = 'none';
+         episodesDescriptionRef.current.style.display = 'block';
+         setShowControlEpisodes(false);
       }
    };
 
    useEffect(() => {
       rowRef.current.onmouseenter = () => {
-         handleShowControlMovie();
+         handleShowControlEpisodes();
       };
 
       rowRef.current.onmouseleave = () => {
-         handleHideControlMovie();
+         handleHideControlEpisodes();
       };
 
       // eslint-disable-next-line
-   }, [showControlMovie]);
+   }, [showControlEpisodes]);
 
    useEffect(() => {
       setIsCheckedState(isChecked);
@@ -71,8 +71,8 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
             <div
                className={cx('table-col')}
                style={{
-                  flex: '0 0 var(--first-col)',
-                  minWidth: 'var(--first-col)',
+                  flex: '0 0 43px',
+                  minWidth: '33px',
                   cursor: 'pointer',
                }}
                onClick={() => {
@@ -89,13 +89,10 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                   onChange={() => {}}
                />
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '3 0 var(--second-col)', minWidth: 'var(--second-col)' }}
-            >
-               <div className={cx('movie')}>
-                  <div className={cx('movie-left')}>
-                     <div className={cx('wrapper-image-movie')}>
+            <div className={cx('table-col')} style={{ flex: '3 0 390px', minWidth: '390px' }}>
+               <div className={cx('episodes')}>
+                  <div className={cx('episodes-left')}>
+                     <div className={cx('wrapper-image-episodes')}>
                         <img src={dataRow.img} alt="" />
 
                         <div className={cx('layer')}>
@@ -108,17 +105,17 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                         </div>
                      </div>
                   </div>
-                  <div className={cx('movie-right')}>
-                     <div className={cx('movie-right_name')}>
+                  <div className={cx('episodes-right')}>
+                     <div className={cx('episodes-right_name')}>
                         <Link to="#" nametooltip={'Chi tiết'}>
                            {dataRow._name}
                         </Link>
                      </div>
 
-                     <div className={cx('movie-right_description')} ref={movieDescriptionRef}>
+                     <div className={cx('episodes-right_description')} ref={episodesDescriptionRef}>
                         {dataRow.description}
                      </div>
-                     <div className={cx('movie-right_controls')} ref={movieControlRef}>
+                     <div className={cx('episodes-right_controls')} ref={episodesControlRef}>
                         <Link
                            to="/product/details"
                            className={cx('controls-icon')}
@@ -138,10 +135,7 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                   </div>
                </div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '2 0 var(--third-col)', minWidth: 'var(--third-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '2 0 90px', minWidth: '90px' }}>
                <div className={cx('category')}>
                   {dataRow.categories &&
                      dataRow.categories.map((element, index) =>
@@ -149,22 +143,13 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                      )}
                </div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '0.5 0 var(--fourth-col)', minWidth: 'var(--fourth-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
                <div className={cx('status')}>{dataRow._status}</div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '1 0 var(--fifth-col)', minWidth: 'var(--fifth-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '1 0 90px', minWidth: '90px' }}>
                <div className={cx('recent')}>{formatTime(dataRow.releaseDate)}</div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '0.5 0 var(--sixth-col)', minWidth: 'var(--sixth-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '0.5 0 69px', minWidth: '100px' }}>
                <div className={cx('count_episodes')}>{dataRow.episodes}</div>
             </div>
          </div>
@@ -172,4 +157,4 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
    );
 }
 
-export default memo(RowMovie);
+export default memo(RowEpisodes);
