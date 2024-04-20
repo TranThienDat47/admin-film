@@ -21,8 +21,8 @@ const cx = classNames.bind(style);
 
 function Episodes() {
    const {
-      globalState: { productCurrent, pageProductCurrent, ableLoadingMoreProduct },
-      loadProduct,
+      globalState: { productDetailCurrent, pageProductDetailCurrent, ableLoadingMoreProductDetail },
+      getProductDetail,
       setShowCreateEpisodes,
    } = useContext(GlobalContext);
 
@@ -40,14 +40,14 @@ function Episodes() {
    };
 
    useEffect(() => {
-      if (productCurrent.length <= 0) {
-         loadProduct().then(() => {});
+      if (productDetailCurrent.length <= 0) {
+         getProductDetail().then(() => {});
       }
    }, []);
 
    useEffect(() => {
-      setListEpisodessState(productCurrent);
-   }, [productCurrent]);
+      setListEpisodessState(productDetailCurrent);
+   }, [productDetailCurrent]);
 
    return (
       <>
@@ -109,7 +109,7 @@ function Episodes() {
                               <div
                                  className={cx('table-col')}
                                  style={{
-                                    flex: '0 0 43px',
+                                    flex: '0 0 56px',
                                     minWidth: '33px',
                                     cursor: 'pointer',
                                  }}
@@ -127,32 +127,40 @@ function Episodes() {
                                     onChange={() => {}}
                                  />
                               </div>
-                              <div className={cx('table-col')} style={{ flex: '3 0 390px', minWidth: '390px' }}>
-                                 Phim
-                              </div>
-                              <div className={cx('table-col')} style={{ flex: '2 0 90px', minWidth: '90px' }}>
-                                 Thể loại
+                              <div className={cx('table-col')} style={{ flex: '3 0 203px', minWidth: '203px' }}>
+                                 Tập phim
                               </div>
                               <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
-                                 Trạng thái
+                                 Chế độ hiển thị
+                              </div>
+                              <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
+                                 Quy định hạn chế
                               </div>
                               <div
                                  className={cx('table-col')}
                                  style={{
-                                    flex: '1 0 90px',
+                                    flex: '0.5 0 90px',
                                     minWidth: '90px',
                                     color: 'var(--text-color)',
                                     cursor: 'pointer',
                                     userSelect: 'none',
                                  }}
                               >
-                                 Sửa đổi gần nhất
+                                 Ngày
                                  <div className={cx('table-col-icon')}>
                                     <MdArrowUpward></MdArrowUpward>
                                  </div>
                               </div>
-                              <div className={cx('table-col')} style={{ flex: '0.5 0 69px', minWidth: '100px' }}>
-                                 Số tập hiện tại
+                              <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
+                                 Số lượt xem
+                              </div>
+
+                              <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px' }}>
+                                 Số bình luận
+                              </div>
+
+                              <div className={cx('table-col')} style={{ flex: '0.5 0 90px', minWidth: '90px', display: 'flex', justifyContent: 'flex-end' }}>
+                                 Lượt thích
                               </div>
                            </div>
                            <div className={cx('table-content')}>

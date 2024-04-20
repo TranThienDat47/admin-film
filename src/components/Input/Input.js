@@ -81,11 +81,7 @@ const Input = forwardRef(
             onClick={() => {
                inputRef.current.focus();
             }}
-            className={cx(
-               'wrapper',
-               { [className]: className },
-               statusState === 1 ? 'is_focus' : statusState === 2 ? 'invalid' : '',
-            )}
+            className={cx('wrapper', { [className]: className }, statusState === 1 ? 'is_focus' : statusState === 2 ? 'invalid' : '')}
             {...props}
             ref={ref}
          >

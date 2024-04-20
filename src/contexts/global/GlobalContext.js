@@ -9,7 +9,13 @@ import {
    fetchProductCurrentFailure,
    setShowCreateEpisodesCreator,
    setQueueTaskAddVideoCreator,
+   fetchProductDetailCurrentSuccess,
+   fetchProductDetailCurrentFailure,
+   fetchProductDetailCurrentRequest,
+   setShowTempCreateEpisodesCreator,
+   setDataTempCreateEpisodesCreator,
 } from '../actionCreators/global';
+import ProductDetailServices from '~/services/ProductDetailServices';
 
 const GlobalContext = createContext();
 
@@ -29,14 +35,13 @@ const GlobalContextProvider = ({ children }) => {
       })
          .then((data) => {
             if (data.success) {
-               dispatch({
-                  type: 'FETCH_PRODUCT_CURRENT_SUCCESS',
-                  payload: {
+               dispatch(
+                  fetchProductCurrentSuccess({
                      productCurrent: data.products,
                      ableLoadingMoreProduct: false,
                      pageProductCurrent: globalState.pageProductCurrent + 1,
-                  },
-               });
+                  }),
+               );
             } else {
                dispatch(fetchProductCurrentFailure(data.message));
             }
@@ -46,15 +51,54 @@ const GlobalContextProvider = ({ children }) => {
          });
    };
 
+   const getProductDetail = async (productID = -1) => {
+      dispatch(fetchProductDetailCurrentRequest());
+
+      await ProductDetailServices.get({ product_id: '6603db4674ce368028f6974f' })
+         .then((data) => {
+            if (data.success) {
+               console.log(data);
+               dispatch(
+                  fetchProductDetailCurrentSuccess({
+                     productDetailCurrent: data.product_details,
+                     ableLoadingMoreProductDetail: false,
+                     pageProductDetailCurrent: globalState.pageProductDetailCurrent + 1,
+                  }),
+               );
+            } else {
+               dispatch(fetchProductDetailCurrentFailure(data.message));
+            }
+         })
+         .catch((error) => {
+            dispatch(fetchProductDetailCurrentFailure(error.message));
+         });
+   };
+
    const setShowCreateEpisodes = (showCreateEpisodesState) => {
       dispatch(setShowCreateEpisodesCreator(showCreateEpisodesState));
+   };
+
+   const setShowTempCreateEpisodes = (showTempCreateEpisodesState) => {
+      dispatch(setShowTempCreateEpisodesCreator(showTempCreateEpisodesState));
+   };
+
+   const setDataTempCreateEpisodes = (dataTempCreateEpisodesState) => {
+      dispatch(setDataTempCreateEpisodesCreator(dataTempCreateEpisodesState));
    };
 
    const setQueueTaskAddVideo = (queueTaskAddVideoState) => {
       dispatch(setQueueTaskAddVideoCreator(queueTaskAddVideoState));
    };
 
-   const globalContextData = { globalState, loadProduct, setShowCreateEpisodes, setQueueTaskAddVideo };
+   const globalContextData = {
+      globalState,
+      loadProduct,
+      setShowCreateEpisodes,
+      setShowTempCreateEpisodes,
+      setDataTempCreateEpisodes,
+      setQueueTaskAddVideo,
+      getProductDetail,
+   };
 
    return <GlobalContext.Provider value={globalContextData}> {children}</GlobalContext.Provider>;
 };

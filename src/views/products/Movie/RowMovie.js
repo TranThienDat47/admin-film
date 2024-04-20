@@ -37,7 +37,7 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
    };
 
    useEffect(() => {
-      rowRef.current.onmouseenter = () => {
+      rowRef.current.onmousemove = () => {
          handleShowControlMovie();
       };
 
@@ -89,19 +89,14 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                   onChange={() => {}}
                />
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '3 0 var(--second-col)', minWidth: 'var(--second-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '3 0 var(--second-col)', minWidth: 'var(--second-col)' }}>
                <div className={cx('movie')}>
                   <div className={cx('movie-left')}>
                      <div className={cx('wrapper-image-movie')}>
                         <img src={dataRow.img} alt="" />
 
                         <div className={cx('layer')}>
-                           <span>
-                              {dataRow.currentEpisodes === '??' ? '0' : dataRow.currentEpisodes}
-                           </span>
+                           <span>{dataRow.currentEpisodes === '??' ? '0' : dataRow.currentEpisodes}</span>
                            <div className={cx('layer-icon')}>
                               <MdPlaylistPlay></MdPlaylistPlay>
                            </div>
@@ -119,11 +114,7 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                         {dataRow.description}
                      </div>
                      <div className={cx('movie-right_controls')} ref={movieControlRef}>
-                        <Link
-                           to="/product/details"
-                           className={cx('controls-icon')}
-                           nametooltip={'Chi tiết'}
-                        >
+                        <Link to="/product/details" className={cx('controls-icon')} nametooltip={'Chi tiết'}>
                            <div>
                               <LiaPencilAltSolid />
                            </div>
@@ -138,33 +129,18 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                   </div>
                </div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '2 0 var(--third-col)', minWidth: 'var(--third-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '2 0 var(--third-col)', minWidth: 'var(--third-col)' }}>
                <div className={cx('category')}>
-                  {dataRow.categories &&
-                     dataRow.categories.map((element, index) =>
-                        index === 0 ? `[${element.title}]` : ` / [${element.title}]`,
-                     )}
+                  {dataRow.categories && dataRow.categories.map((element, index) => (index === 0 ? `[${element.title}]` : ` / [${element.title}]`))}
                </div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '0.5 0 var(--fourth-col)', minWidth: 'var(--fourth-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '0.5 0 var(--fourth-col)', minWidth: 'var(--fourth-col)' }}>
                <div className={cx('status')}>{dataRow._status}</div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '1 0 var(--fifth-col)', minWidth: 'var(--fifth-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '1 0 var(--fifth-col)', minWidth: 'var(--fifth-col)' }}>
                <div className={cx('recent')}>{formatTime(dataRow.releaseDate)}</div>
             </div>
-            <div
-               className={cx('table-col')}
-               style={{ flex: '0.5 0 var(--sixth-col)', minWidth: 'var(--sixth-col)' }}
-            >
+            <div className={cx('table-col')} style={{ flex: '0.5 0 var(--sixth-col)', minWidth: 'var(--sixth-col)' }}>
                <div className={cx('count_episodes')}>{dataRow.episodes}</div>
             </div>
          </div>

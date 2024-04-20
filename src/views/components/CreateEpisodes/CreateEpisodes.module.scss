@@ -2,7 +2,11 @@ button {
    cursor: pointer;
 }
 
+.item-stack {
+}
+
 .wrapper {
+   cursor: auto;
    position: fixed;
    top: 0;
    bottom: 0;
@@ -24,10 +28,10 @@ button {
       display: flex;
       flex-direction: column;
 
-      width: 969px;
+      width: 1069px;
       min-height: 493px;
       min-width: 693px;
-      border-radius: 16px;
+      border-radius: 9px;
       margin: auto;
       height: 90%;
       background-color: var(--white);
@@ -146,6 +150,7 @@ button {
       flex: 1 0 363px;
       display: flex;
       flex-direction: column;
+      overflow: auto;
 
       .wrapper-image {
          position: relative;

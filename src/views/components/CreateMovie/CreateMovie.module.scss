@@ -30,7 +30,7 @@ input::-webkit-calendar-picker-indicator {
 
    input {
       border: 1px solid var(--border-color);
-      border-radius: 9px;
+      border-radius: 6px;
       padding: 6px 13px;
       line-height: 2.3rem;
    }
@@ -54,7 +54,7 @@ input::-webkit-calendar-picker-indicator {
       min-height: 293px;
       width: 739px;
       min-width: 593px;
-      border-radius: 16px;
+      border-radius: 9px;
       margin: auto;
       background-color: var(--white);
       z-index: 1;

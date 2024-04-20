@@ -1,3 +1,4 @@
+//product
 const fetchProductCurrentRequest = () => ({
    type: 'FETCH_PRODUCT_CURRENT_REQUEST',
    payload: {},
@@ -13,6 +14,23 @@ const fetchProductCurrentFailure = ({ error }) => ({
    payload: { error },
 });
 
+//product detail
+const fetchProductDetailCurrentRequest = () => ({
+   type: 'FETCH_PRODUCT_DETAIL_CURRENT_REQUEST',
+   payload: {},
+});
+
+const fetchProductDetailCurrentSuccess = ({ productDetailCurrent, ableLoadingMoreProductDetail, pageProductDetailCurrent }) => ({
+   type: 'FETCH_PRODUCT_DETAIL_CURRENT_SUCCESS',
+   payload: { productDetailCurrent, ableLoadingMoreProductDetail, pageProductDetailCurrent },
+});
+
+const fetchProductDetailCurrentFailure = ({ error }) => ({
+   type: 'FETCH_PRODUCT_DETAIL_CURRENT_FAILURE',
+   payload: { error },
+});
+
+//create
 const setShowCreateEpisodesCreator = (showCreateEpisodesState) => ({
    type: 'SET_SHOW_CREATE_EPISODES',
    payload: {
@@ -20,6 +38,7 @@ const setShowCreateEpisodesCreator = (showCreateEpisodesState) => ({
    },
 });
 
+//task add video
 const setQueueTaskAddVideoCreator = (queueTaskAddVideoState) => ({
    type: 'PUSH_QUEUE_TASK_ADD_VIDEO',
    payload: {
@@ -27,4 +46,30 @@ const setQueueTaskAddVideoCreator = (queueTaskAddVideoState) => ({
    },
 });
 
-export { fetchProductCurrentRequest, fetchProductCurrentSuccess, fetchProductCurrentFailure, setShowCreateEpisodesCreator, setQueueTaskAddVideoCreator };
+//createEpisodes
+const setShowTempCreateEpisodesCreator = (showTempCreateEpisodesState) => ({
+   type: 'SET_SHOW_TEMP_CREATE_EPISODES',
+   payload: {
+      showTempCreateEpisodesState,
+   },
+});
+
+const setDataTempCreateEpisodesCreator = (dataTempCreateEpisodesState) => ({
+   type: 'SET_DATA_TEMP_CREATE_EPISODES',
+   payload: {
+      dataTempCreateEpisodesState,
+   },
+});
+
+export {
+   fetchProductCurrentRequest,
+   fetchProductCurrentSuccess,
+   fetchProductCurrentFailure,
+   setShowCreateEpisodesCreator,
+   setQueueTaskAddVideoCreator,
+   fetchProductDetailCurrentRequest,
+   fetchProductDetailCurrentSuccess,
+   fetchProductDetailCurrentFailure,
+   setShowTempCreateEpisodesCreator,
+   setDataTempCreateEpisodesCreator,
+};

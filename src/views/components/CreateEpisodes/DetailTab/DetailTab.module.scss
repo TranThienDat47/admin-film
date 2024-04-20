@@ -1,0 +1,149 @@
+.wrapper {
+   overflow-y: auto;
+}
+
+.header {
+   margin: 16px 49px;
+}
+
+.inner {
+   display: flex;
+   padding-top: 9px;
+}
+
+.inner-left {
+   width: 63%;
+
+   .inner-left_content {
+      padding: 0px 9px 16px 49px;
+
+      .content-row {
+         margin-bottom: 23px;
+      }
+   }
+
+   .content-row_title {
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin-bottom: 13px;
+   }
+
+   .content-row_sub-title {
+      font-weight: bold;
+      margin-bottom: 9px;
+   }
+
+   .content-row_description {
+      color: var(--text-bland);
+      font-size: 1.4rem;
+
+      & > a {
+         font-size: 1.3rem;
+         color: var(--link-color);
+      }
+   }
+}
+
+.content-row_thumnails-list {
+   margin-top: 16px;
+   display: flex;
+
+   .content-row_thumnails-item,
+   .content-row_thumnails-item_create {
+      user-select: none;
+      -webkit-user-drag: none;
+      cursor: pointer;
+      width: 144px;
+      height: 81px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      overflow: hidden;
+
+      &:not(:first-child) {
+         margin-left: 13px;
+      }
+   }
+
+   .content-row_thumnails-item {
+      position: relative;
+
+      &::after {
+         position: absolute;
+         top: 0;
+         left: 0;
+         content: '';
+         width: 100%;
+         height: 100%;
+         background-color: var(--modal-loading);
+      }
+
+      &:hover {
+         &::after {
+            background-color: transparent;
+         }
+      }
+   }
+
+   .content-row_thumnails-item_activ {
+      &::after {
+         background-color: transparent;
+      }
+      border: 2px solid var(--text-color);
+   }
+
+   .content-row_thumnails-item_create {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-style: dashed;
+
+      color: var(--text-bland);
+
+      .content-row_thumnails-item_create-icon {
+         font-size: 2rem;
+      }
+
+      .content-row_thumnails-item_create-title {
+         font-size: 1.36rem;
+      }
+   }
+}
+
+input[type='radio'] {
+   transform: scale(1.3);
+
+   accent-color: var(--text-color);
+}
+
+.content-row_radio-list {
+   margin-top: 16px;
+   display: flex;
+   flex-direction: column;
+
+   .content-row_radio-item {
+      display: flex;
+      font-size: 1.7rem;
+
+      & > div {
+         margin-left: 9px;
+      }
+
+      &:not(:first-child) {
+         margin-top: 6px;
+      }
+   }
+}
+
+.inner-right {
+   position: sticky;
+   top: 0;
+   height: fit-content;
+   padding: 0 43px 0 13px;
+}
+.wrapper-video {
+   .inner-video {
+      border-radius: 3px;
+      overflow: hidden;
+   }
+}

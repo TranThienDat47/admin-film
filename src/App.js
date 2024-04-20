@@ -11,6 +11,8 @@ import Logout from '~/route/routing/Logout';
 import Auth from '~/views/Auth/index.js';
 import { GlobalContext } from './contexts/global';
 import GlobalContextProvider from './contexts/global/GlobalContext';
+import StackAddVideo from './layout/WrapperLayout/StackAddVideo/StackAddVideo';
+import WrapperLayout from './layout/WrapperLayout/WrapperLayout';
 
 function App() {
    return (
@@ -30,7 +32,11 @@ function App() {
                         <Route
                            key={index}
                            path={route.path}
-                           element={<Layout>{route.component ? <Page /> : ''}</Layout>}
+                           element={
+                              <WrapperLayout>
+                                 <Layout>{route.component ? <Page /> : ''}</Layout>
+                              </WrapperLayout>
+                           }
                         />
                      );
                   })}
@@ -44,13 +50,18 @@ function App() {
                      {privateRoutes.map((route, index) => {
                         const Page = route.compnent;
                         let Layout = DefaultLayout;
+                        let WrapperLayout = WrapperLayout;
                         if (route.layout) Layout = route.layout;
                         else if (route.layout === null) Layout = Fragment;
                         return (
                            <Route
                               key={index}
                               path={route.path}
-                              element={<Layout>{route.component ? <Page /> : ''}</Layout>}
+                              element={
+                                 <WrapperLayout>
+                                    <Layout>{route.component ? <Page /> : ''}</Layout>
+                                 </WrapperLayout>
+                              }
                            />
                         );
                      })}

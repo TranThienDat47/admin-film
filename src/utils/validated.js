@@ -45,7 +45,7 @@ const validateTime = (time) => {
    };
 };
 
-const converterDate = (dateString) => {
+const converterDate = (dateString, time = false) => {
    const date = new Date(dateString);
 
    const day = date.getDate().toString().padStart(2, '0');
@@ -75,9 +75,7 @@ const formattedEpisodes = (data = []) => {
       return episodeB - episodeA;
    });
 
-   const maxEpisodes = Math.max(
-      ...data.map((element) => parseInt(element.episode)).filter((element) => !isNaN(element)),
-   );
+   const maxEpisodes = Math.max(...data.map((element) => parseInt(element.episode)).filter((element) => !isNaN(element)));
 
    const lengthMax = String(maxEpisodes).length;
 

@@ -31,6 +31,7 @@ import { MdOutlineVideoSettings } from 'react-icons/md';
 import CreateMovie from '~/views/components/CreateMovie';
 import CreateEpisodes from '~/views/components/CreateEpisodes';
 import { GlobalContext } from '~/contexts/global';
+import StackAddVideo from '../../WrapperLayout/StackAddVideo/StackAddVideo';
 
 const cx = classNames.bind(styles);
 
@@ -271,13 +272,6 @@ function Header() {
                setShowCreateState(0);
             }}
             hidden={showCreateState !== 1}
-         />
-
-         <CreateEpisodes
-            handleClose={() => {
-               setShowCreateEpisodes(false);
-            }}
-            hidden={!showCreateEpisodesState}
          />
       </>
    );

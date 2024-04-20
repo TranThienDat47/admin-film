@@ -1,5 +1,5 @@
 :root {
-   --width-episodes-image: 113px;
+   --width-episodes-image: 153px;
    // --height-header-product-detail: 76px;
 
    --first-col: 43px;
@@ -148,6 +148,16 @@
 .table-col {
    border-bottom: 1px solid var(--border-color);
    padding-right: 6px;
+
+   &:last-child {
+      padding-right: 19px;
+      display: flex;
+      justify-content: flex-end;
+   }
+
+   & > div {
+      padding-top: 16px;
+   }
 }
 
 .table-header {
@@ -175,6 +185,7 @@
 
    & > div:last-child {
       padding-left: 0;
+      padding-right: 36px;
    }
 
    & > div:first-child {
@@ -219,7 +230,6 @@
    }
 
    .category {
-      padding-top: 16px;
       overflow: hidden;
       text-overflow: ellipsis;
       -webkit-line-clamp: 8;
@@ -227,13 +237,10 @@
       display: -webkit-box;
    }
    .status {
-      padding-top: 16px;
    }
    .recent {
-      padding-top: 16px;
    }
    .count_episodes {
-      padding-top: 16px;
       text-align: right;
       padding-right: 16px;
    }
@@ -251,12 +258,12 @@
       position: relative;
       border-radius: 3px;
       overflow: hidden;
-      width: var(--width-episodes-image);
+      width: 144px;
 
       &::before {
          content: '';
          display: block;
-         padding-top: 135.3333%;
+         padding-top: 56.25%;
          background-color: aliceblue;
       }
 
@@ -339,8 +346,8 @@
    & > .controls-icon {
       color: var(--text-bland);
       display: flex;
-      font-size: 2.9rem;
-      padding: 6px;
+      font-size: 2.6rem;
+      padding: 3px 6px;
       padding-bottom: 3px;
       margin-top: 9px;
 

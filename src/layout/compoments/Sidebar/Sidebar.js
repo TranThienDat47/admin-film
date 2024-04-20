@@ -33,70 +33,48 @@ const Sidebar = forwardRef((prop, ref) => {
          icon: BiCategory,
          title: 'Trang tổng quan',
          active: false,
-         href:
-            routes.home !== null && typeof routes.home === 'object'
-               ? Object.values(routes.home)
-               : [routes.home],
+         href: routes.home !== null && typeof routes.home === 'object' ? Object.values(routes.home) : [routes.home],
       },
       {
          id: 2,
          icon: MdOutlineVideoSettings,
          title: 'Nội dung',
          active: true,
-         href:
-            routes.product !== null && typeof routes.product === 'object'
-               ? Object.values(routes.product)
-               : [routes.product],
+         href: routes.product !== null && typeof routes.product === 'object' ? Object.values(routes.product) : [routes.product],
       },
       {
          id: 3,
          icon: BiCommentDetail,
          title: 'Bình luận',
          active: false,
-         href:
-            routes.comment !== null && typeof routes.comment === 'object'
-               ? Object.values(routes.comment)
-               : [routes.comment],
+         href: routes.comment !== null && typeof routes.comment === 'object' ? Object.values(routes.comment) : [routes.comment],
       },
       {
          id: 4,
          icon: TbCategoryPlus,
          title: 'Thể loại',
          active: false,
-         href:
-            routes.category !== null && typeof routes.category === 'object'
-               ? Object.values(routes.category)
-               : [routes.category],
+         href: routes.category !== null && typeof routes.category === 'object' ? Object.values(routes.category) : [routes.category],
       },
       {
          id: 5,
          icon: AiOutlineBarChart,
          title: 'Số liệu phân tích',
          active: false,
-         href:
-            routes.analyst !== null && typeof routes.analyst === 'object'
-               ? Object.values(routes.analyst)
-               : [routes.analyst],
+         href: routes.analyst !== null && typeof routes.analyst === 'object' ? Object.values(routes.analyst) : [routes.analyst],
       },
       {
          id: 6,
          icon: PiNotificationThin,
          title: 'Gửi thông báo',
          active: false,
-         href:
-            routes.notify !== null && typeof routes.notify === 'object'
-               ? Object.values(routes.notify)
-               : [routes.notify],
+         href: routes.notify !== null && typeof routes.notify === 'object' ? Object.values(routes.notify) : [routes.notify],
       },
    ];
 
    tempDataItnitState = tempDataItnitState.map((element) => {
       if (element.href.length === 1) {
-         if (
-            element.href &&
-            element.href.includes(currentPath) &&
-            currentPath.length === element.href[0].length
-         ) {
+         if (element.href && element.href.includes(currentPath) && currentPath.length === element.href[0].length) {
             element.active = true;
          } else {
             element.active = false;
@@ -123,9 +101,7 @@ const Sidebar = forwardRef((prop, ref) => {
    const handleClickItemSideBar = (dataTemp) => {
       setDataInitState((prev) =>
          prev.map((element, i) => {
-            parseInt(element.id) === parseInt(dataTemp.id)
-               ? (element.active = true)
-               : (element.active = false);
+            parseInt(element.id) === parseInt(dataTemp.id) ? (element.active = true) : (element.active = false);
 
             return element;
          }),
