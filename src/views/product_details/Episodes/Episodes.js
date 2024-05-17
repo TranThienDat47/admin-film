@@ -21,17 +21,18 @@ const cx = classNames.bind(style);
 
 function Episodes() {
    const {
-      globalState: { productDetailCurrent, pageProductDetailCurrent, ableLoadingMoreProductDetail },
+      globalState: { productDetailCurrent, loadingProductDetail, pageProductDetailCurrent, ableLoadingMoreProductDetail },
       getProductDetail,
       setShowCreateEpisodes,
    } = useContext(GlobalContext);
+
+   const urlParams = new URLSearchParams(window.location.search);
+   const product_id = urlParams.get('id');
 
    const wrapperRef = useRef(null);
 
    const searchInputRef = useRef(null);
    const checkBoxRef = useRef(null);
-
-   const [listEpisodessState, setListEpisodessState] = useState([]);
 
    const [isAllChecked, setAllChecked] = useState(false);
 
@@ -40,14 +41,8 @@ function Episodes() {
    };
 
    useEffect(() => {
-      if (productDetailCurrent.length <= 0) {
-         getProductDetail().then(() => {});
-      }
-   }, []);
-
-   useEffect(() => {
-      setListEpisodessState(productDetailCurrent);
-   }, [productDetailCurrent]);
+      getProductDetail(product_id).then(() => {});
+   }, [product_id]);
 
    return (
       <>
@@ -164,9 +159,10 @@ function Episodes() {
                               </div>
                            </div>
                            <div className={cx('table-content')}>
-                              {listEpisodessState.map((element, index) => (
-                                 <RowEpisodes dataRow={element} key={index} isChecked={isAllChecked} onCheckboxChange={handleAllCheckboxChange} />
-                              ))}
+                              {loadingProductDetail ||
+                                 productDetailCurrent.map((element, index) => (
+                                    <RowEpisodes dataRow={element} key={index} isChecked={isAllChecked} onCheckboxChange={handleAllCheckboxChange} />
+                                 ))}
                            </div>
                         </div>
 

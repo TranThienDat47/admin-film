@@ -742,6 +742,8 @@ const Watch = ({ width, height }) => {
       };
    }, [handleMouseMoveProgress, handleMoveProgress, handlePreviewVideo]);
 
+   console.log('oh no ');
+
    return (
       <div ref={watchRef} className={cx('wrapper')}>
          <div ref={wrapperVideoRef} className={cx('watch')}>
@@ -766,14 +768,8 @@ const Watch = ({ width, height }) => {
                </div>
                <div className={cx('icon')}>
                   <div className={cx('inner-icon', 'left')}>
-                     <button type="button" className={cx('btn-prev')}>
-                        <BiSkipPrevious />
-                     </button>
                      <button ref={play_pause_Ref} type="button" className={cx('btn-player')}>
                         {play === 0 ? <BsFillPlayFill /> : play === 1 ? <AiOutlinePause /> : <MdReplay />}
-                     </button>
-                     <button type="button" className={cx('btn-next')}>
-                        <BiSkipNext />
                      </button>
                      <button ref={volumeRef} type="button" className={cx('btn-volume')}>
                         {volume === 0 ? (

@@ -41,8 +41,8 @@ function Header() {
    } = useContext(AuthContext);
 
    const {
-      globalState: { showCreateEpisodesState },
-      setShowCreateEpisodes,
+      globalState: { showCreateMovieState },
+      setShowCreateMovie,
    } = useContext(GlobalContext);
 
    const [showCreateState, setShowCreateState] = useState(0);
@@ -102,7 +102,7 @@ function Header() {
          title: <div className={cx('title')}>Tạo phim mới</div>,
          left_icon: <RiVideoUploadLine className={cx('icon')} />,
          onChange: () => {
-            setShowCreateState(1);
+            setShowCreateMovie(true);
          },
       },
 
@@ -110,7 +110,7 @@ function Header() {
          title: <div className={cx('title')}>Tải video ngắn lên</div>,
          left_icon: <MdOutlineVideoSettings className={cx('icon')} />,
          onChange: () => {
-            setShowCreateState(2);
+            // setShowCreateState(2);
          },
       },
    ]);
@@ -269,9 +269,9 @@ function Header() {
          {/* <HeaderSidebar ref={childRef} /> */}
          <CreateMovie
             handleClose={() => {
-               setShowCreateState(0);
+               setShowCreateMovie(false);
             }}
-            hidden={showCreateState !== 1}
+            hidden={!showCreateMovieState}
          />
       </>
    );

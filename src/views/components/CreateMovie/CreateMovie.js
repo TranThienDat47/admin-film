@@ -18,6 +18,7 @@ import uploadImagebb from '~/utils/uploadImagebb';
 import ProductService from '~/services/ProductServices';
 import LoadingFetch from '~/components/LoadingFetch';
 import AlertStatusBottom from '~/components/AlertStatusBottom';
+import CategoriesServices from '~/services/CategoriesServices';
 
 const cx = classNames.bind(styles);
 
@@ -51,6 +52,8 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
    const tempTranslateBallRef = useRef(0);
 
    const tempDataUpload = useRef(null);
+
+   const [dataInitCategories, setDataInitCategories] = useState([]);
 
    const [dataSubmitState, setDataSubmitState] = useState({
       _name: '',
@@ -241,6 +244,34 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
       });
    };
 
+   const handleAfterSubmit = () => {
+      setAbleCreateStateState(false);
+      setLoadingState(false);
+      setChooseFileState(null);
+      setInfoImageState({ scale: '1', objectPosition: '0 0' });
+      clientMouseDownImageRef.current = { x: 0, y: 0 };
+      prevClientMouseDownImageRef.current = { x: 0, y: 0 };
+      tempScaleRef.current = 1;
+      tempTranslateBallRef.current = 0;
+      tempDataUpload.current = null;
+      setDataSubmitState({
+         _name: '',
+         description: '',
+         anotherName: '',
+         _status: '',
+         img: '',
+         episodes: '',
+         view: 0,
+         releaseDate: '',
+         news: true,
+         reacts: 0,
+         categories: [],
+         country_Of_Origin: '',
+         background: '',
+         keySearch: '',
+      });
+   };
+
    const handleSubmit = async () => {
       validateValue().then((data) => {
          if (data) {
@@ -255,14 +286,23 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                })
                .then(async () => {
                   await ProductService.add(tempDataUpload.current).then(() => {
-                     setHiddenState(true);
+                     handleClose();
                      setVisibleMessageState(true);
+                     setTimeout(() => {
+                        handleAfterSubmit();
+                     }, 10);
                   });
                })
                .catch(() => {});
          }
       });
    };
+
+   useEffect(() => {
+      CategoriesServices.get().then((res) => {
+         setDataInitCategories(res.categories.map((category) => ({ _id: category._id, title: category.title })));
+      });
+   }, []);
 
    useEffect(() => {
       setHiddenState(hidden);
@@ -413,14 +453,7 @@ function CreateMovie({ hidden = false, handleClose = () => {} }) {
                                                 categories: categoryChildRef.current.getChooseList(),
                                              }));
                                           }}
-                                          dataRecommend={[
-                                             { title: 'Ac quy', id: 0 },
-                                             { title: 'huhu', id: 1 },
-                                             { title: 'huhu', id: 2 },
-                                             { title: 'huhu', id: 3 },
-                                             { title: 'huhu', id: 4 },
-                                             { title: 'huhu', id: 5 },
-                                          ]}
+                                          dataRecommend={dataInitCategories}
                                        />
                                     </div>
                                  </div>

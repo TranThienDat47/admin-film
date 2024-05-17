@@ -14,6 +14,7 @@ import {
    fetchProductDetailCurrentRequest,
    setShowTempCreateEpisodesCreator,
    setDataTempCreateEpisodesCreator,
+   setShowCreateMovieCreator,
 } from '../actionCreators/global';
 import ProductDetailServices from '~/services/ProductDetailServices';
 
@@ -54,10 +55,9 @@ const GlobalContextProvider = ({ children }) => {
    const getProductDetail = async (productID = -1) => {
       dispatch(fetchProductDetailCurrentRequest());
 
-      await ProductDetailServices.get({ product_id: '6603db4674ce368028f6974f' })
+      await ProductDetailServices.get({ product_id: productID })
          .then((data) => {
             if (data.success) {
-               console.log(data);
                dispatch(
                   fetchProductDetailCurrentSuccess({
                      productDetailCurrent: data.product_details,
@@ -72,6 +72,10 @@ const GlobalContextProvider = ({ children }) => {
          .catch((error) => {
             dispatch(fetchProductDetailCurrentFailure(error.message));
          });
+   };
+
+   const setShowCreateMovie = (showCreateMovieState) => {
+      dispatch(setShowCreateMovieCreator(showCreateMovieState));
    };
 
    const setShowCreateEpisodes = (showCreateEpisodesState) => {
@@ -93,6 +97,7 @@ const GlobalContextProvider = ({ children }) => {
    const globalContextData = {
       globalState,
       loadProduct,
+      setShowCreateMovie,
       setShowCreateEpisodes,
       setShowTempCreateEpisodes,
       setDataTempCreateEpisodes,

@@ -6,12 +6,7 @@ import { FaRegCircleXmark } from 'react-icons/fa6';
 
 import { MdArrowDropDown } from 'react-icons/md';
 
-import {
-   CgChevronLeft,
-   CgChevronRight,
-   CgPushChevronLeft,
-   CgPushChevronRight,
-} from 'react-icons/cg';
+import { CgChevronLeft, CgChevronRight, CgPushChevronLeft, CgPushChevronRight } from 'react-icons/cg';
 
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -46,8 +41,6 @@ function Movie() {
 
    useEffect(() => {
       setListMoviesState(productCurrent);
-
-      console.log(productCurrent);
    }, [productCurrent]);
 
    return (
@@ -74,12 +67,7 @@ function Movie() {
             </div>
 
             <div className={cx('filter-main')}>
-               <input
-                  ref={searchInputRef}
-                  type="text"
-                  className={cx('txt_filter')}
-                  placeholder="Lọc"
-               />
+               <input ref={searchInputRef} type="text" className={cx('txt_filter')} placeholder="Lọc" />
             </div>
          </div>
          <div className={cx('main-content')}>
@@ -106,22 +94,13 @@ function Movie() {
                         onChange={() => {}}
                      />
                   </div>
-                  <div
-                     className={cx('table-col')}
-                     style={{ flex: '3 0 var(--second-col)', minWidth: 'var(--second-col)' }}
-                  >
+                  <div className={cx('table-col')} style={{ flex: '3 0 var(--second-col)', minWidth: 'var(--second-col)' }}>
                      Phim
                   </div>
-                  <div
-                     className={cx('table-col')}
-                     style={{ flex: '2 0 var(--third-col)', minWidth: 'var(--third-col)' }}
-                  >
+                  <div className={cx('table-col')} style={{ flex: '2 0 var(--third-col)', minWidth: 'var(--third-col)' }}>
                      Thể loại
                   </div>
-                  <div
-                     className={cx('table-col')}
-                     style={{ flex: '0.5 0 var(--fourth-col)', minWidth: 'var(--fourth-col)' }}
-                  >
+                  <div className={cx('table-col')} style={{ flex: '0.5 0 var(--fourth-col)', minWidth: 'var(--fourth-col)' }}>
                      Trạng thái
                   </div>
                   <div
@@ -139,21 +118,13 @@ function Movie() {
                         <MdArrowUpward></MdArrowUpward>
                      </div>
                   </div>
-                  <div
-                     className={cx('table-col')}
-                     style={{ flex: '0.5 0 var(--sixth-col)', minWidth: 'var(--sixth-col)' }}
-                  >
+                  <div className={cx('table-col')} style={{ flex: '0.5 0 var(--sixth-col)', minWidth: 'var(--sixth-col)' }}>
                      Số tập hiện tại
                   </div>
                </div>
                <div className={cx('table-content')}>
                   {listMoviesState.map((element, index) => (
-                     <RowMovie
-                        dataRow={element}
-                        key={index}
-                        isChecked={isAllChecked}
-                        onCheckboxChange={handleAllCheckboxChange}
-                     />
+                     <RowMovie dataRow={element} key={index} isChecked={isAllChecked} onCheckboxChange={handleAllCheckboxChange} />
                   ))}
                </div>
             </div>

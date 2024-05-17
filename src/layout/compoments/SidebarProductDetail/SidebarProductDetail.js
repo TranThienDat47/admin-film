@@ -20,6 +20,9 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
    const listRefCenter = useRef(null);
    const listRefBottom = useRef(null);
 
+   const urlParams = new URLSearchParams(window.location.search);
+   const product_id = urlParams.get('id');
+
    const currentPath = window.location.pathname;
 
    var tempDataItnitState = [
@@ -29,8 +32,7 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
          title: 'Chi tiết',
          active: false,
          href:
-            routes.product_detail.detail !== null &&
-            typeof routes.product_detail.detail === 'object'
+            routes.product_detail.detail !== null && typeof routes.product_detail.detail === 'object'
                ? Object.values(routes.product_detail.detail)
                : [routes.product_detail.detail],
       },
@@ -50,8 +52,7 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
          title: 'Số liệu phân tích',
          active: false,
          href:
-            routes.product_detail.analyst !== null &&
-            typeof routes.product_detail.analyst === 'object'
+            routes.product_detail.analyst !== null && typeof routes.product_detail.analyst === 'object'
                ? Object.values(routes.product_detail.analyst)
                : [routes.product_detail.analyst],
       },
@@ -59,11 +60,7 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
 
    tempDataItnitState = tempDataItnitState.map((element) => {
       if (element.href.length === 1) {
-         if (
-            element.href &&
-            element.href.includes(currentPath) &&
-            currentPath.length === element.href[0].length
-         ) {
+         if (element.href && element.href.includes(currentPath) && currentPath.length === element.href[0].length) {
             element.active = true;
          } else {
             element.active = false;
@@ -88,9 +85,7 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
    const handleClickItemSideBar = (dataTemp) => {
       setDataInitState((prev) =>
          prev.map((element, i) => {
-            parseInt(element.id) === parseInt(dataTemp.id)
-               ? (element.active = true)
-               : (element.active = false);
+            parseInt(element.id) === parseInt(dataTemp.id) ? (element.active = true) : (element.active = false);
 
             return element;
          }),
@@ -150,7 +145,7 @@ const SidebarProductDetail = forwardRef((prop, ref) => {
             </div>
             <div className={cx('list', 'list-center')} ref={listRefCenter}>
                {dataInitState.map((elment, index) => (
-                  <Link key={elment.href[0]} to={elment.href[0]}>
+                  <Link key={elment.href[0]} to={elment.href[0] + `?id=${product_id}`}>
                      <div
                         className={cx('item', `${elment.active ? 'active' : ''}`)}
                         onClick={() => {

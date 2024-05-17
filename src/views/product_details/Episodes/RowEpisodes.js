@@ -117,7 +117,7 @@ function RowEpisodes({ dataRow = {}, isChecked = false, onCheckboxChange = () =>
                      </div>
 
                      <div className={cx('episodes-right_description')} ref={episodesDescriptionRef}>
-                        {dataRow.description.length > 0 ? dataRow.description : 'Thêm nội dung mô tả'}
+                        {dataRow.description?.length > 0 ? dataRow.description : 'Thêm nội dung mô tả'}
                      </div>
 
                      <div className={cx('episodes-right_controls')} ref={episodesControlRef}>

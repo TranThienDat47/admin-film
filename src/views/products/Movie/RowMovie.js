@@ -105,7 +105,7 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                   </div>
                   <div className={cx('movie-right')}>
                      <div className={cx('movie-right_name')}>
-                        <Link to="#" nametooltip={'Chi tiết'}>
+                        <Link to={'/product/details?id=' + dataRow._id} nametooltip={'Chi tiết'}>
                            {dataRow._name}
                         </Link>
                      </div>
@@ -114,7 +114,7 @@ function RowMovie({ dataRow = {}, isChecked = false, onCheckboxChange = () => {}
                         {dataRow.description}
                      </div>
                      <div className={cx('movie-right_controls')} ref={movieControlRef}>
-                        <Link to="/product/details" className={cx('controls-icon')} nametooltip={'Chi tiết'}>
+                        <Link to={'/product/details?id=' + dataRow._id} className={cx('controls-icon')} nametooltip={'Chi tiết'}>
                            <div>
                               <LiaPencilAltSolid />
                            </div>

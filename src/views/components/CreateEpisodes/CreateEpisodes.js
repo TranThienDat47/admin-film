@@ -92,28 +92,31 @@ const CreateEpisodes = forwardRef(
          setHiddenState(hidden);
       }, [hidden]);
 
-      console.log(tempDataState);
-      // useEffect(() => {
-      // }, [data]);
-
       useEffect(() => {
          if (chooseFileRef.current) {
             chooseFileRef.current.onchange = (e) => {
                handleFileChange(e.target.files);
             };
          }
+
+         console.log();
       }, []);
 
       const handleFileChange = async (files) => {
          if (files.length > 0) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
             const selectedFile = files[0];
             const fileName = selectedFile.name;
-            const product_id = '6603db4674ce368028f6974f';
+            const product_id = id || null;
 
             const formData = new FormData();
             formData.append('video', selectedFile);
             formData.append('file_name', fileName);
             formData.append('product_id', product_id);
+
+            console.log(product_id);
 
             setLoadingState(true);
 

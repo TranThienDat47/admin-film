@@ -19,7 +19,7 @@ const InputSearchSelection = forwardRef(
       },
       ref,
    ) => {
-      const [dataChooseState, setDataChooseState] = useState([]); //{title: "", id: 0}
+      const [dataChooseState, setDataChooseState] = useState([]); //{title: "", _id: 0}
       const [dataRecommendState, setDataRecommendState] = useState(dataRecommend);
       const [showRecommendState, setShowRecommendState] = useState(showRecommend);
 
@@ -28,10 +28,7 @@ const InputSearchSelection = forwardRef(
 
       useEffect(() => {
          function handleClickOutside(event) {
-            if (
-               wrapperRecommendRef.current &&
-               !wrapperRecommendRef.current.contains(event.target)
-            ) {
+            if (wrapperRecommendRef.current && !wrapperRecommendRef.current.contains(event.target)) {
                setShowRecommendState(false);
             }
          }
@@ -70,13 +67,7 @@ const InputSearchSelection = forwardRef(
                <div className={cx('main')}>
                   {dataChooseState.map((element, index) => (
                      <div key={element.id} className={cx('item-choose')}>
-                        <span
-                           {...(nameItem.length >= 0
-                              ? { nametooltip: `${nameItem} "${element.title}"` }
-                              : {})}
-                        >
-                           {element.title}
-                        </span>
+                        <span {...(nameItem.length >= 0 ? { nametooltip: `${nameItem} "${element.title}"` } : {})}>{element.title}</span>
                         <div
                            className={cx('item-icon')}
                            onClick={() => {
@@ -100,8 +91,7 @@ const InputSearchSelection = forwardRef(
                      />
                      {showRecommendState &&
                         (maxNumChoose >= 0 ? (
-                           dataRecommendState.length > 0 &&
-                           dataChooseState.length < +maxNumChoose ? (
+                           dataRecommendState.length > 0 && dataChooseState.length < +maxNumChoose ? (
                               <>
                                  <div className={cx('wrapper-recommend')}>
                                     <div className={cx('recommend-list')}>
@@ -110,9 +100,7 @@ const InputSearchSelection = forwardRef(
                                              key={element.id}
                                              onClick={() => {
                                                 setDataChooseState((prev) => [...prev, element]);
-                                                setDataRecommendState((prev) =>
-                                                   prev.filter((item) => item !== element),
-                                                );
+                                                setDataRecommendState((prev) => prev.filter((item) => item !== element));
 
                                                 inputRef.current.focus();
                                              }}
@@ -128,9 +116,7 @@ const InputSearchSelection = forwardRef(
                               <>
                                  <div className={cx('wrapper-recommend')}>
                                     <div className={cx('recommend-list')}>
-                                       <div className={cx('recommend-item', 'unable')}>
-                                          Tối đa {maxNumChoose} lựa chọn
-                                       </div>
+                                       <div className={cx('recommend-item', 'unable')}>Tối đa {maxNumChoose} lựa chọn</div>
                                     </div>
                                  </div>
                               </>
@@ -141,12 +127,10 @@ const InputSearchSelection = forwardRef(
                                  <div className={cx('recommend-list')}>
                                     {dataRecommendState.map((element, index) => (
                                        <div
-                                          key={element.id}
+                                          key={element._id}
                                           onClick={() => {
                                              setDataChooseState((prev) => [...prev, element]);
-                                             setDataRecommendState((prev) =>
-                                                prev.filter((item) => item !== element),
-                                             );
+                                             setDataRecommendState((prev) => prev.filter((item) => item !== element));
 
                                              inputRef.current.focus();
                                           }}
@@ -162,9 +146,7 @@ const InputSearchSelection = forwardRef(
                            <>
                               <div className={cx('wrapper-recommend')}>
                                  <div className={cx('recommend-list')}>
-                                    <div className={cx('recommend-item', 'unable')}>
-                                       Không có lựa chọn phù hợp nào
-                                    </div>
+                                    <div className={cx('recommend-item', 'unable')}>Không có lựa chọn phù hợp nào</div>
                                  </div>
                               </div>
                            </>

@@ -13,6 +13,8 @@ export const initialState = {
    ableLoadingMoreProductDetail: true,
    loadingProductDetail: true,
 
+   showCreateMovieState: false,
+
    showCreateEpisodesState: false,
 
    showTempCreateEpisodesState: false,
@@ -25,105 +27,115 @@ export const initialState = {
    error: null,
 };
 
-export const globalReducer = (state, action) => {
-   const {
-      type,
-      payload: {
-         theme,
-         language,
-         error,
-         infoSearch,
-
-         productCurrent,
+const cases = [
+   //product
+   {
+      type: 'FETCH_PRODUCT_CURRENT_REQUEST',
+      returnData: (state, { keyProductCurrent }) => ({
+         ...state,
+         loadingProduct: true,
          keyProductCurrent,
-         pageProductCurrent,
+      }),
+   },
+   {
+      type: 'FETCH_PRODUCT_CURRENT_SUCCESS',
+      returnData: (state, { productCurrent, ableLoadingMoreProduct, pageProductCurrent }) => ({
+         ...state,
+         loadingProduct: false,
+         productCurrent,
          ableLoadingMoreProduct,
-         maxLengthOfPageProduct,
+         pageProductCurrent,
+      }),
+   },
+   {
+      type: 'FETCH_PRODUCT_CURRENT_FAILURE',
+      returnData: (state, { error }) => ({
+         ...state,
+         loadingProduct: false,
+         error,
+      }),
+   },
 
-         productDetailCurrent,
+   //product detail
+   {
+      type: 'FETCH_PRODUCT_DETAIL_CURRENT_REQUEST',
+      returnData: (state, { keyProductDetailCurrent }) => ({
+         ...state,
+         loadingProductDetail: true,
          keyProductDetailCurrent,
-         pageProductDetailCurrent,
+      }),
+   },
+   {
+      type: 'FETCH_PRODUCT_DETAIL_CURRENT_SUCCESS',
+      returnData: (state, { productDetailCurrent, ableLoadingMoreProductDetail, pageProductDetailCurrent }) => ({
+         ...state,
+         loadingProductDetail: false,
+         productDetailCurrent,
          ableLoadingMoreProductDetail,
-         maxLengthOfPageProductDetail,
+         pageProductDetailCurrent,
+      }),
+   },
+   {
+      type: 'FETCH_PRODUCT_DETAIL_CURRENT_FAILURE',
+      returnData: (state, { error }) => ({
+         ...state,
+         loadingProductDetail: false,
+         error,
+      }),
+   },
 
+   //show create movie state
+   {
+      type: 'SET_SHOW_CREATE_MOVIE',
+      returnData: (state, { showCreateMovieState }) => ({
+         ...state,
+         showCreateMovieState,
+      }),
+   },
+
+   //show create episodes state
+   {
+      type: 'SET_SHOW_CREATE_EPISODES',
+      returnData: (state, { showCreateEpisodesState }) => ({
+         ...state,
          showCreateEpisodesState,
+      }),
+   },
 
+   //show temp create episodes state
+   {
+      type: 'SET_SHOW_TEMP_CREATE_EPISODES',
+      returnData: (state, { showTempCreateEpisodesState }) => ({
+         ...state,
          showTempCreateEpisodesState,
+      }),
+   },
+
+   //data temp create episodes state
+   {
+      type: 'SET_DATA_TEMP_CREATE_EPISODES',
+      returnData: (state, { dataTempCreateEpisodesState }) => ({
+         ...state,
          dataTempCreateEpisodesState,
+      }),
+   },
 
+   //queue task add video state
+   {
+      type: 'PUSH_QUEUE_TASK_ADD_VIDEO',
+      returnData: (state, { queueTaskAddVideoState }) => ({
+         ...state,
          queueTaskAddVideoState,
-      },
-   } = action;
+      }),
+   },
+];
 
-   switch (type) {
-      //product
-      case 'FETCH_PRODUCT_CURRENT_REQUEST':
-         return {
-            ...state,
-            loadingProduct: true,
-            keyProductCurrent,
-         };
-      case 'FETCH_PRODUCT_CURRENT_SUCCESS':
-         return {
-            ...state,
-            loadingProduct: false,
-            productCurrent,
-            ableLoadingMoreProduct,
-            pageProductCurrent,
-         };
-      case 'FETCH_PRODUCT_CURRENT_FAILURE':
-         return {
-            ...state,
-            loadingProduct: false,
-            error,
-         };
+export const globalReducer = (state, action) => {
+   const selectedCase = cases.find((item) => item.type === action.type);
 
-      //product detai;
-      case 'FETCH_PRODUCT_DETAIL_CURRENT_REQUEST':
-         return {
-            ...state,
-            loadingProductDetail: true,
-            keyProductDetailCurrent,
-         };
-      case 'FETCH_PRODUCT_DETAIL_CURRENT_SUCCESS':
-         return {
-            ...state,
-            loadingProductDetail: false,
-            productDetailCurrent,
-            ableLoadingMoreProductDetail,
-            pageProductDetailCurrent,
-         };
-      case 'FETCH_PRODUCT_DETAIL_CURRENT_FAILURE':
-         return {
-            ...state,
-            loadingProductDetail: false,
-            error,
-         };
-
-      case 'SET_SHOW_CREATE_EPISODES':
-         return {
-            ...state,
-            showCreateEpisodesState,
-         };
-
-      case 'SET_SHOW_TEMP_CREATE_EPISODES':
-         return {
-            ...state,
-            showTempCreateEpisodesState,
-         };
-
-      case 'SET_DATA_TEMP_CREATE_EPISODES':
-         return {
-            ...state,
-            dataTempCreateEpisodesState,
-         };
-
-      case 'PUSH_QUEUE_TASK_ADD_VIDEO':
-         return {
-            ...state,
-            queueTaskAddVideoState,
-         };
-      default:
-         return state;
+   if (selectedCase) {
+      return selectedCase.returnData(state, action.payload);
+   } else {
+      return state;
    }
 };

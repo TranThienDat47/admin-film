@@ -2,10 +2,10 @@ import axios from 'axios';
 
 import { apiUrl } from '~/config/constants';
 
-class ProductDetailServices {
-   async get({ product_id }) {
+class CategoriesServices {
+   async get() {
       try {
-         const response = await axios.get(`${apiUrl}/product_details/${product_id}`);
+         const response = await axios.get(`${apiUrl}/categories`);
          return response.data;
       } catch (error) {
          return { success: false, message: error.message };
@@ -13,4 +13,4 @@ class ProductDetailServices {
    }
 }
 
-export default new ProductDetailServices();
+export default new CategoriesServices();

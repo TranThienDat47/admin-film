@@ -233,18 +233,9 @@ function ProductDetail() {
 
    const validateValue = () => {
       return new Promise((resolve, reject) => {
-         const { _name, description, _status, img, episodes, releaseDate, categories } =
-            dataSubmitState;
+         const { _name, description, _status, img, episodes, releaseDate, categories } = dataSubmitState;
 
-         if (
-            !_name ||
-            !description ||
-            !_status ||
-            !img ||
-            !episodes ||
-            !releaseDate ||
-            categories.length === 0
-         ) {
+         if (!_name || !description || !_status || !img || !episodes || !releaseDate || categories.length === 0) {
             resolve(false);
          } else {
             resolve(true);
@@ -294,9 +285,7 @@ function ProductDetail() {
                handleMouseUpImage(e);
             };
 
-            imageRef.current.style.backgroundImage = `url("${imageRef.current.getAttribute(
-               'srcimage',
-            )}")`;
+            imageRef.current.style.backgroundImage = `url("${imageRef.current.getAttribute('srcimage')}")`;
          }
 
          window.onmousemove = (e) => {
@@ -333,23 +322,11 @@ function ProductDetail() {
                         Hủy thay đổi
                      </Button>
 
-                     <Button
-                        key="save1"
-                        disable
-                        primary
-                        ripleAnimation
-                        ripleAnimationLight
-                        style={{ marginLeft: '9px' }}
-                     >
+                     <Button key="save1" disable primary ripleAnimation ripleAnimationLight style={{ marginLeft: '9px' }}>
                         Lưu
                      </Button>
 
-                     <Button
-                        key="option1"
-                        transparent
-                        fullWidth
-                        style={{ width: `39px`, marginLeft: '9px' }}
-                     >
+                     <Button key="option1" transparent fullWidth style={{ width: `39px`, marginLeft: '9px' }}>
                         <HiOutlineDotsVertical />
                      </Button>
                   </div>
@@ -492,11 +469,7 @@ function ProductDetail() {
                                  <>
                                     <div
                                        ref={imageRef}
-                                       srcimage={
-                                          chooseFileState
-                                             ? URL.createObjectURL(chooseFileState)
-                                             : imgs.noImage
-                                       }
+                                       srcimage={chooseFileState ? URL.createObjectURL(chooseFileState) : imgs.noImage}
                                        className={cx('main-image')}
                                     ></div>
                                     <div
@@ -517,18 +490,9 @@ function ProductDetail() {
                                           <FiMinusCircle />
                                        </div>
                                        <div className={cx('control-setup-transfrom-inner')}>
-                                          <div
-                                             ref={mainProgressRef}
-                                             className={cx('control-setup-transfrom-main')}
-                                          >
-                                             <div
-                                                className={cx('control-setup-transfrom-middle')}
-                                             ></div>
-                                             <div
-                                                ref={ballRef}
-                                                scalevalue={infoImageState.scale + 'x'}
-                                                className={cx('control-setup-transfrom-ball')}
-                                             ></div>
+                                          <div ref={mainProgressRef} className={cx('control-setup-transfrom-main')}>
+                                             <div className={cx('control-setup-transfrom-middle')}></div>
+                                             <div ref={ballRef} scalevalue={infoImageState.scale + 'x'} className={cx('control-setup-transfrom-ball')}></div>
                                           </div>
                                        </div>
                                        <div
@@ -591,8 +555,7 @@ function ProductDetail() {
                                     onChangeOption={() => {
                                        setDataSubmitState((prev) => ({
                                           ...prev,
-                                          country_Of_Origin:
-                                             countryChildRef.current.getOptionChoose().value,
+                                          country_Of_Origin: countryChildRef.current.getOptionChoose().value,
                                        }));
                                     }}
                                  />

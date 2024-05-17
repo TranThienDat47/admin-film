@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const apiKey = process.env.REACT_APP_KEY_UPLOAD_IMAGEBB;
 
 const blobToBuffer = (blob) => {
@@ -21,9 +19,18 @@ const uploadImage = async (blobImageUrl = '') => {
       formData.append('key', apiKey);
       formData.append('image', new Blob([buffer]));
 
-      const imgBBResponse = await axios.post('https://api.imgbb.com/1/upload', formData);
+      const imgBBResponse = await fetch('https://api.imgbb.com/1/upload', {
+         method: 'POST',
+         body: formData,
+      });
 
-      return { success: true, data: imgBBResponse.data.data };
+      if (!imgBBResponse.ok) {
+         throw new Error('Network response was not ok');
+      }
+
+      const imgBBData = await imgBBResponse.json();
+
+      return { success: true, data: imgBBData.data };
    } catch (error) {
       console.error('Error uploading image:', error.message);
       return { success: false, error: error.message };

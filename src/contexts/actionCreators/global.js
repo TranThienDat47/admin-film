@@ -30,7 +30,15 @@ const fetchProductDetailCurrentFailure = ({ error }) => ({
    payload: { error },
 });
 
-//create
+//create movie
+const setShowCreateMovieCreator = (showCreateMovieState) => ({
+   type: 'SET_SHOW_CREATE_MOVIE',
+   payload: {
+      showCreateMovieState,
+   },
+});
+
+//create episodes
 const setShowCreateEpisodesCreator = (showCreateEpisodesState) => ({
    type: 'SET_SHOW_CREATE_EPISODES',
    payload: {
@@ -65,6 +73,7 @@ export {
    fetchProductCurrentRequest,
    fetchProductCurrentSuccess,
    fetchProductCurrentFailure,
+   setShowCreateMovieCreator,
    setShowCreateEpisodesCreator,
    setQueueTaskAddVideoCreator,
    fetchProductDetailCurrentRequest,
